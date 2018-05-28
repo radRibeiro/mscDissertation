@@ -5,39 +5,51 @@
 %%
 %% Chapter with a short laext tutorial and examples
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{A Short \LaTeX\ Tutorial with Examples}
-\label{cha:a_short_latex_tutorial_with_examples}
+\chapter{Plano de trabalhos para a Elaboração da dissertação}
+\label{cha3}
 
-This Chapter aims at exemplifying how to do common stuff with \LaTeX. We also show some stuff which is not that common! ;)
+%This Chapter aims at exemplifying how to do common stuff with \LaTeX. We also show some stuff which is not that common! ;)
+%
+%Please, use these examples as a starting point, but you should always consider using the \emph{Big Oracle} (aka, \href{http://www.google.com}{Google}, your best friend) to search for additional information or alternative ways for achieving similar results.
 
-Please, use these examples as a starting point, but you should always consider using the \emph{Big Oracle} (aka, \href{http://www.google.com}{Google}, your best friend) to search for additional information or alternative ways for achieving similar results.
 
-\section{Document Structure} % (fold)
-\label{sec:document_structure}
+\section{Possibilidades de optimização} % (fold)
+\label{abordagem}
+O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o código respetivo às unidades bogie.pas e dockdomains.pas, que implementam as etapas definidas nos pontos \ref{biggerAlg} e \ref{bogieAlg}.
+Face à possibilidade de não existir nenhuma versão do CUDA para programar paralelizações em Free Pascal%citar resposta stackOverflow 
+ põe-se de lado esta última alternativa em troca de uma outra que recorra à framework OpenCL, que é suportada pelo Lazarus (IDE a utilizar durante a Elaboração).
+Poderão vir a ser implementados para a paralelização das duas unidades, kernels que executam operações de mapeamento, em que o espaço de possibilidades a tratar na primeira fase do BiGGER poderá ser associado a uma estrutura de dados, dividida por blocos em que estes últimos serão constituidos por casas indexadas pelo ID da thread correspondente, pelo que a indexação geral estará associada a uma formula que envolva a posição da thread no bloco e o número de bloco, para cada uma das posições o core do GPU executará a função que determina se a configuração é aceite ou não.
+%Introduzir figura do cuda sobre um array com indexacao de threads e blocos
 
+
+
+\section {Desafios}
+Os desafios incidem-se sobre dois pontos:
+\begin{itemize}
+\item{\textbf{Criação das grelhas}}
+\item{\textbf{Pesquisa de sobreposições}}
+\end{itemize}
 % section document_structure (end)
-
-
-\section{Dealing with Bibliogrpahy} % (fold)
+\section{Plano de Trabalhos} % (fold)
 \label{sec:dealing_with_bibliogrpahy}
 
 % section dealing_with_bibliogrpahy (end)
 
 
-\section{Inserting Tables} % (fold)
-\label{sec:inserting_tables}
-
-% section inserting_tables (end)
-
-
-\section{Importing Images} % (fold)
-\label{sec:importing_images}
+%\section{Inserting Tables} % (fold)
+%\label{sec:inserting_tables}
+%
+%% section inserting_tables (end)
+%
+%
+%\section{Importing Images} % (fold)
+%\label{sec:importing_images}
 
 % section importing_images (end)
 
 
-\section{Floats, Figures and Captions} % (fold)
-\label{sec:floats_figures_and_captions}
+%\section{Floats, Figures and Captions} % (fold)
+%\label{sec:floats_figures_and_captions}
 
 % \subsection{Inserting Figures Wrapped with text} % (fold)
 % \label{ssec:inserting_images_wrapped_with_text}
@@ -69,196 +81,196 @@ Please, use these examples as a starting point, but you should always consider u
 
 % section floats_figures_and_captions (end)
 
-\lipsum[1-3]
+%\lipsum[1-3]
+%
+%\begin{figure}[htbp]
+%  \centering
+%  \subcaptionbox{One sub-figure\label{fig:leftsubfig}}%
+%    {\includegraphics[width=0.5\linewidth]{knitting-vectorial}}%
+%  \subcaptionbox{Another sub-figure\label{fig:rightsubfig}}%
+%    {\includegraphics[width=0.5\linewidth]{knitting-vectorial}}%
+%  \caption{A figure with two sub-figures!}
+%  \label{fig:fig2subfig}
+%\end{figure}
+%
+%\textbf{And this is a small text that references the Figure~\ref{fig:fig2subfig} and its Subfigures~\ref{fig:leftsubfig} and~\ref{fig:rightsubfig}.}
+%
+%\lipsum[1-3]
 
-\begin{figure}[htbp]
-  \centering
-  \subcaptionbox{One sub-figure\label{fig:leftsubfig}}%
-    {\includegraphics[width=0.5\linewidth]{knitting-vectorial}}%
-  \subcaptionbox{Another sub-figure\label{fig:rightsubfig}}%
-    {\includegraphics[width=0.5\linewidth]{knitting-vectorial}}%
-  \caption{A figure with two sub-figures!}
-  \label{fig:fig2subfig}
-\end{figure}
 
-\textbf{And this is a small text that references the Figure~\ref{fig:fig2subfig} and its Subfigures~\ref{fig:leftsubfig} and~\ref{fig:rightsubfig}.}
-
-\lipsum[1-3]
-
-
-\section{Text Formatting} % (fold)
-\label{sec:text_formatting}
+%\section{Text Formatting} % (fold)
+%\label{sec:text_formatting}
 
 % section text_formatting (end)
 
 
-\section{Generating PDFs from \LaTeX} % (fold)
-\label{sec:generating_pdfs_from_latex}
-
-\subsection{Generating PDFs with pdflatex} % (fold)
-\label{ssec:generating_pdfs_with_pdflatex}
-
-You may create PDF files either by using \verb!latex! to generate a DVI file, and then use one of the many DVI-2-PDF converters, such as \verb!dvipdfm!.
-
-Alternatively, you may use \verb!pdflatex!, which will immediately generate a PDF with no intermediate DVI or PS files. In some systems, such as Apple, PDF is already the default format for \LaTeX. I strongly recommend you to use this approach, unless you have a very good argument to go for \verb!latex! + \verb!dvipdfm!.
-
-A typical pass for a document with figures, cross-references and a bibliography would be:
-\begin{verbatim}
-$ pdflatex template
-$ bibtex template
-$ pdflatex template
-$ pdflatex template
-\end{verbatim}
-You will notice that there is a new PDF file in the working directory called \verb!template.pdf!. Simple :)
-
-Please note that, to be sure all table of contents, cross-references and bibliographic citations are up-to-date, you must run \verb!latex! once, then \verb!bibtex!, and then \verb!latex! twice.
-% section generating_pdfs_with_pdflatex (end)
-
-\subsection{Dealing with Images} % (fold)
-\label{sub:dealing_with_images}
-
-You may process the same source files with both \verb!latex! or \verb!pdflatex!. But, if your text include images, you must be careful. \verb!latex! and \verb!pdflatex! accept images in different (exclusive) formats.  For \verb!latex! you may use EPS ou PS figures. For \verb!pdflatex! you may use JPG, PNG or PDF figures.  I strongly recommend you to use PDF figures in vectorial format (do not use bitmap images unless you have no other choice).
-% subsection dealing_with_images (end)
-
-
-\subsection{Creating Source Files Compatible with both latex and pdflatex} % (fold)
-\label{ssec:creating_source_files_compatible_with_both_latex_and_pdflatex}
-
-Do not include the extension of the file in the \verb!\includegraphics! command. E.g., use\\
-\verb!\includegraphics{sonwman}!\\
-and not\\
-\verb!\includegraphics{sonwman.eps}!.\\
-If you use the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
-
-This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.
-% subsection creating_source_files_compatible_with_both_latex_and_pdflatex (end)
-
-% section generating_pdfs_from_latex (end)
+%\section{Generating PDFs from \LaTeX} % (fold)
+%\label{sec:generating_pdfs_from_latex}
+%
+%\subsection{Generating PDFs with pdflatex} % (fold)
+%\label{ssec:generating_pdfs_with_pdflatex}
+%
+%You may create PDF files either by using \verb!latex! to generate a DVI file, and then use one of the many DVI-2-PDF converters, such as \verb!dvipdfm!.
+%
+%Alternatively, you may use \verb!pdflatex!, which will immediately generate a PDF with no intermediate DVI or PS files. In some systems, such as Apple, PDF is already the default format for \LaTeX. I strongly recommend you to use this approach, unless you have a very good argument to go for \verb!latex! + \verb!dvipdfm!.
+%
+%A typical pass for a document with figures, cross-references and a bibliography would be:
+%\begin{verbatim}
+%$ pdflatex template
+%$ bibtex template
+%$ pdflatex template
+%$ pdflatex template
+%\end{verbatim}
+%You will notice that there is a new PDF file in the working directory called \verb!template.pdf!. Simple :)
+%
+%Please note that, to be sure all table of contents, cross-references and bibliographic citations are up-to-date, you must run \verb!latex! once, then \verb!bibtex!, and then \verb!latex! twice.
+%% section generating_pdfs_with_pdflatex (end)
+%
+%\subsection{Dealing with Images} % (fold)
+%\label{sub:dealing_with_images}
+%
+%You may process the same source files with both \verb!latex! or \verb!pdflatex!. But, if your text include images, you must be careful. \verb!latex! and \verb!pdflatex! accept images in different (exclusive) formats.  For \verb!latex! you may use EPS ou PS figures. For \verb!pdflatex! you may use JPG, PNG or PDF figures.  I strongly recommend you to use PDF figures in vectorial format (do not use bitmap images unless you have no other choice).
+%% subsection dealing_with_images (end)
 
 
-\newpage
-
-{\Large To be included in the sections above}\\
-
-Para fazer citações, deverá usar-se a chave da referência no ficheiro BibTeX. Se for uma única referência~\cite{Artho04}, usar um ``\verb!~!'' para ligar o \verb!\cite{...}! à palavra que o precede (\ldots\verb!referência~\cite{Artho04}!).  Caso queira fazer múltiplas citações~\cite{Shavit95,Silberschatz06,Moss85}, deverá agrupá-las dentro de um úinico \verb!\cite{...}!.
-
-Note que o ficheiro de bibliografia pode ter tantas entradas quantas quiser. Apenas aquelas cuja chave seja referenciada no texto é que serão incluidas na listagem de bibliografia.
-
-
-Footnotes\footnote{This is a simple footnote.} will be numbered and shown in the bottom of the page.
-
-
-A Tabela~\ref{tab:hla:results} ilustra alguns conceitos importantes associados à contrução de tabelas:
-\begin{asparaenum}[i)]
-	\item Não usar linhas verticais;
-	\item A legenda deve ficar por cima da tabela;
-	\item Usar as macros \verb!\toprule!, \verb!\midrule! e \verb!\bottomrule! para fazer a linha horizontal superior, interiores e inferior, respectivamente.
-\end{asparaenum}
- 
-\begin{table}[ht]
-	\caption{Test results summary.}
-	\label{tab:hla:results}
-\centering
-\begin{tabular}{lccccc}
-	\toprule
-	\multicolumn{1}{c}{\textbf{Test}} 	& \textbf{Anomalies}	& \textbf{Warnings}	& \textbf{Correct} 	& \textbf{Categories}		& \textbf{Missed} \\
-	\midrule
-\cite{Beckman08}~Connection 	& 2 & 2	& 1	& \emph{C}				& 1 \\
-\cite{Artho03}~Coordinates'03 	& 1	& 4	& 1	& \emph{2B, 1C}			& 0 \\
-\cite{Artho03}~Local Variable	& 1	& 2	& 1	& \emph{A}				& 0 \\
-\cite{Artho03}~NASA				& 1	& 1	& 1	& ---					& 0 \\
-\cite{Artho04}~Coordinates'04	& 1	& 4	& 1	& \emph{3C}				& 0 \\
-\cite{Artho04}~Buffer			& 0	& 7	& 0	& \emph{2A, 1B, 2C, 2D}	& 0 \\
-\cite{Artho04}~Double-Check		& 0	& 2	& 0	& \emph{1A, 1B}			& 0 \\
-\cite{Flanagan04}~StringBuffer	& 1	& 0	& 0	& ---					& 1 \\
-\cite{Praun03}~Account			& 1	& 1	& 1	& ---					& 0 \\
-\cite{Praun03}~Jigsaw			& 1	& 2	& 1	& \emph{C}				& 0 \\
-\cite{Praun03}~Over-reporting	& 0	& 2	& 0	& \emph{1A, 1C}			& 0 \\
-\cite{Praun03}~Under-reporting	& 1	& 1	& 1	& ---					& 0 \\
-\cite{IBM-Rep}~Allocate Vector	& 1	& 2	& 1	& \emph{C}				& 0 \\
-Knight Moves					& 1	& 3	& 1	& \emph{2B}				& 0 \\
-	\midrule
-	\textbf{Total}			& \textbf{12}		& \textbf{33}		& \textbf{10}			& \textbf{5A, 6B, 10C, 2D}	& \textbf{2} \\
-	\bottomrule
-\end{tabular}
-\end{table}
+%\subsection{Creating Source Files Compatible with both latex and pdflatex} % (fold)
+%\label{ssec:creating_source_files_compatible_with_both_latex_and_pdflatex}
+%
+%Do not include the extension of the file in the \verb!\includegraphics! command. E.g., use\\
+%\verb!\includegraphics{sonwman}!\\
+%and not\\
+%\verb!\includegraphics{sonwman.eps}!.\\
+%If you use the first form, \verb!latex! or \verb!pdflatex! will add an appropriate file extension.
+%
+%This means that, if you plan to use only \verb!pdflatex!, you need only to keep (preferably) a PDF version of all the images. If you plan to use also \verb!latex!, then you also need an EPS version of each image.
+%% subsection creating_source_files_compatible_with_both_latex_and_pdflatex (end)
+%
+%% section generating_pdfs_from_latex (end)
 
 
-As figuras a inserir no documento deverão ser de qualidade, preferencialmente em formato vectorial (PDF vectorial) e não em \emph{bitmap} (PNG, JPG, etc). As imagens \emph{bitmap} (Figura~\ref{fig:Figuras_Tree_silhouettes-bitmap}) não escalam bem e têm reflexos negativos na qualidade do seu docuemnto.  Pelo contrário, as imagens \emph{vectoriais} {Figura~\ref{fig:Figuras_Tree_silhouettes-vectorial}} escalam muito tanto quanto o necessário sem degradar a qualidade da imagem.
-
-Só deve usar \emph{screenshots} se não tive mesmo nenhuma alternativa.  Em vez e gerar um \emph{screenshot}, tente usar uma impressora virtual PDF e imprimir para um ficheiro PDF. Regra geral obterá um PDF vetorial. Mesmo que o seu PDF contenha imagens, elas terão sempre qualidade maior ou igual à que obteria com um \emph{screenshot}.
-
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[height=1in]{snowman-bitmap}
-	\includegraphics[height=3in]{snowman-bitmap}
-	\includegraphics[height=6in]{snowman-bitmap}
-	\caption{Imagem em formato \emph{bitmap} (JPG)}
-	\label{fig:Figuras_Tree_silhouettes-bitmap}
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[height=1in]{snowman-vectorial}
-	\includegraphics[height=3in]{snowman-vectorial}
-	\includegraphics[height=6in]{snowman-vectorial}
-	\caption{Imagem em formato PDF vectorial}
-	\label{fig:Figuras_Tree_silhouettes-vectorial}
-\end{figure}
-
-Para agregar várias figuras numa única… Poderá assim referenciar o conjunto~\ref{fig:figura-completa}, a priemira delas~\ref{fig:novelo} ou a segunda~\ref{fig:nuvem}.
-
-
-\begin{figure}[htbp]
-	\centering
-    \subbottom[Novelo de lã] {%
-		\label{fig:novelo}
-		\includegraphics[height=1in]{knitting-vectorial}
-    }
-\qquad\qquad
-    \subbottom[Tempestade com neve] {%
-		\label{fig:nuvem}
-		\includegraphics[height=1in]{snowstorm-vectorial}
-    }
-  \caption{Exemplo de utilização de \emph{subbottom}}
-  \label{fig:figura-completa}
-\end{figure}
-
-
-Para incluir listagens de código no seu documento, deverá incluir o pacote \emph{listings} e depois usar o ambiente \emph{lstlisting}, como exemplificado na Listagem~\ref{lst:HelloWorld}.
-
-\lstset{language=Java, caption=Hello World, label=lst:HelloWorld}
-\begin{lstlisting}
-/** 
- * The HelloWorldApp class implements an application that
- * simply prints "Hello World!" to standard output.
- */
-class HelloWorldApp {%
-    public static void main(String[] args) {%
-        System.out.println("Hello World!"); // Display the string.
-    }
-}
-\end{lstlisting}
-
-\section{Equações}
-
-O LaTeX é uma ferramenta poderosa para escrever em estilo matemático. Permite inserir fórmulas no meio do texto como por exemplo esta: $ax^2 + bx + c = 0$. Também permite que as fórmulas sejam destacadas numa linha separada e centradas na página 
-$$x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$$
-\[x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}\]
-ou numeradas 
-\begin{equation}
-aaa
-\label{eq:1}
-\end{equation}
-que depois pode ser referida no texto como sendo a equação~\ref{eq:1}
-$$\begin{array}{l}
-aa
-\end{array}
-$$
-
-\begin{eqnarray}
-a\\
-b\\
-c\\
-\end{eqnarray}
+%\newpage
+%
+%{\Large To be included in the sections above}\\
+%
+%Para fazer citações, deverá usar-se a chave da referência no ficheiro BibTeX. Se for uma única referência~\cite{Artho04}, usar um ``\verb!~!'' para ligar o \verb!\cite{...}! à palavra que o precede (\ldots\verb!referência~\cite{Artho04}!).  Caso queira fazer múltiplas citações~\cite{Shavit95,Silberschatz06,Moss85}, deverá agrupá-las dentro de um úinico \verb!\cite{...}!.
+%
+%Note que o ficheiro de bibliografia pode ter tantas entradas quantas quiser. Apenas aquelas cuja chave seja referenciada no texto é que serão incluidas na listagem de bibliografia.
+%
+%
+%Footnotes\footnote{This is a simple footnote.} will be numbered and shown in the bottom of the page.
+%
+%
+%A Tabela~\ref{tab:hla:results} ilustra alguns conceitos importantes associados à contrução de tabelas:
+%\begin{asparaenum}[i)]
+%	\item Não usar linhas verticais;
+%	\item A legenda deve ficar por cima da tabela;
+%	\item Usar as macros \verb!\toprule!, \verb!\midrule! e \verb!\bottomrule! para fazer a linha horizontal superior, interiores e inferior, respectivamente.
+%\end{asparaenum}
+% 
+%\begin{table}[ht]
+%	\caption{Test results summary.}
+%	\label{tab:hla:results}
+%\centering
+%\begin{tabular}{lccccc}
+%	\toprule
+%	\multicolumn{1}{c}{\textbf{Test}} 	& \textbf{Anomalies}	& \textbf{Warnings}	& \textbf{Correct} 	& \textbf{Categories}		& \textbf{Missed} \\
+%	\midrule
+%\cite{Beckman08}~Connection 	& 2 & 2	& 1	& \emph{C}				& 1 \\
+%\cite{Artho03}~Coordinates'03 	& 1	& 4	& 1	& \emph{2B, 1C}			& 0 \\
+%\cite{Artho03}~Local Variable	& 1	& 2	& 1	& \emph{A}				& 0 \\
+%\cite{Artho03}~NASA				& 1	& 1	& 1	& ---					& 0 \\
+%\cite{Artho04}~Coordinates'04	& 1	& 4	& 1	& \emph{3C}				& 0 \\
+%\cite{Artho04}~Buffer			& 0	& 7	& 0	& \emph{2A, 1B, 2C, 2D}	& 0 \\
+%\cite{Artho04}~Double-Check		& 0	& 2	& 0	& \emph{1A, 1B}			& 0 \\
+%\cite{Flanagan04}~StringBuffer	& 1	& 0	& 0	& ---					& 1 \\
+%\cite{Praun03}~Account			& 1	& 1	& 1	& ---					& 0 \\
+%\cite{Praun03}~Jigsaw			& 1	& 2	& 1	& \emph{C}				& 0 \\
+%\cite{Praun03}~Over-reporting	& 0	& 2	& 0	& \emph{1A, 1C}			& 0 \\
+%\cite{Praun03}~Under-reporting	& 1	& 1	& 1	& ---					& 0 \\
+%\cite{IBM-Rep}~Allocate Vector	& 1	& 2	& 1	& \emph{C}				& 0 \\
+%Knight Moves					& 1	& 3	& 1	& \emph{2B}				& 0 \\
+%	\midrule
+%	\textbf{Total}			& \textbf{12}		& \textbf{33}		& \textbf{10}			& \textbf{5A, 6B, 10C, 2D}	& \textbf{2} \\
+%	\bottomrule
+%\end{tabular}
+%\end{table}
+%
+%
+%As figuras a inserir no documento deverão ser de qualidade, preferencialmente em formato vectorial (PDF vectorial) e não em \emph{bitmap} (PNG, JPG, etc). As imagens \emph{bitmap} (Figura~\ref{fig:Figuras_Tree_silhouettes-bitmap}) não escalam bem e têm reflexos negativos na qualidade do seu docuemnto.  Pelo contrário, as imagens \emph{vectoriais} {Figura~\ref{fig:Figuras_Tree_silhouettes-vectorial}} escalam muito tanto quanto o necessário sem degradar a qualidade da imagem.
+%
+%Só deve usar \emph{screenshots} se não tive mesmo nenhuma alternativa.  Em vez e gerar um \emph{screenshot}, tente usar uma impressora virtual PDF e imprimir para um ficheiro PDF. Regra geral obterá um PDF vetorial. Mesmo que o seu PDF contenha imagens, elas terão sempre qualidade maior ou igual à que obteria com um \emph{screenshot}.
+%
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[height=1in]{snowman-bitmap}
+%	\includegraphics[height=3in]{snowman-bitmap}
+%	\includegraphics[height=6in]{snowman-bitmap}
+%	\caption{Imagem em formato \emph{bitmap} (JPG)}
+%	\label{fig:Figuras_Tree_silhouettes-bitmap}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[height=1in]{snowman-vectorial}
+%	\includegraphics[height=3in]{snowman-vectorial}
+%	\includegraphics[height=6in]{snowman-vectorial}
+%	\caption{Imagem em formato PDF vectorial}
+%	\label{fig:Figuras_Tree_silhouettes-vectorial}
+%\end{figure}
+%
+%Para agregar várias figuras numa única… Poderá assim referenciar o conjunto~\ref{fig:figura-completa}, a priemira delas~\ref{fig:novelo} ou a segunda~\ref{fig:nuvem}.
+%
+%
+%\begin{figure}[htbp]
+%	\centering
+%    \subbottom[Novelo de lã] {%
+%		\label{fig:novelo}
+%		\includegraphics[height=1in]{knitting-vectorial}
+%    }
+%\qquad\qquad
+%    \subbottom[Tempestade com neve] {%
+%		\label{fig:nuvem}
+%		\includegraphics[height=1in]{snowstorm-vectorial}
+%    }
+%  \caption{Exemplo de utilização de \emph{subbottom}}
+%  \label{fig:figura-completa}
+%\end{figure}
+%
+%
+%Para incluir listagens de código no seu documento, deverá incluir o pacote \emph{listings} e depois usar o ambiente \emph{lstlisting}, como exemplificado na Listagem~\ref{lst:HelloWorld}.
+%
+%\lstset{language=Java, caption=Hello World, label=lst:HelloWorld}
+%\begin{lstlisting}
+%/** 
+% * The HelloWorldApp class implements an application that
+% * simply prints "Hello World!" to standard output.
+% */
+%class HelloWorldApp {%
+%    public static void main(String[] args) {%
+%        System.out.println("Hello World!"); // Display the string.
+%    }
+%}
+%\end{lstlisting}
+%
+%\section{Equações}
+%
+%O LaTeX é uma ferramenta poderosa para escrever em estilo matemático. Permite inserir fórmulas no meio do texto como por exemplo esta: $ax^2 + bx + c = 0$. Também permite que as fórmulas sejam destacadas numa linha separada e centradas na página 
+%$$x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$$
+%\[x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}\]
+%ou numeradas 
+%\begin{equation}
+%aaa
+%\label{eq:1}
+%\end{equation}
+%que depois pode ser referida no texto como sendo a equação~\ref{eq:1}
+%$$\begin{array}{l}
+%aa
+%\end{array}
+%$$
+%
+%\begin{eqnarray}
+%a\\
+%b\\
+%c\\
+%\end{eqnarray}
