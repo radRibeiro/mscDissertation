@@ -15,19 +15,40 @@
 
 \section{Possibilidades de optimização} % (fold)
 \label{abordagem}
-O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o código respetivo às unidades bogie.pas e dockdomains.pas, que implementam as etapas definidas nos pontos \ref{biggerAlg} e \ref{bogieAlg}.
-Face à possibilidade de não existir nenhuma versão do CUDA para programar paralelizações em Free Pascal%citar resposta stackOverflow 
- põe-se de lado esta última alternativa em troca de uma outra que recorra à framework OpenCL, que é suportada pelo Lazarus (IDE a utilizar durante a Elaboração).
-Poderão vir a ser implementados para a paralelização das duas unidades, kernels que executam operações de mapeamento, em que o espaço de possibilidades a tratar na primeira fase do BiGGER poderá ser associado a uma estrutura de dados, dividida por blocos em que estes últimos serão constituidos por casas indexadas pelo ID da thread correspondente, pelo que a indexação geral estará associada a uma formula que envolva a posição da thread no bloco e o número de bloco, para cada uma das posições o core do GPU executará a função que determina se a configuração é aceite ou não.
-%Introduzir figura do cuda sobre um array com indexacao de threads e blocos
+O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o package \textbf{\textit{docking}} mais precisamente às unidades \textbf{bogie.pas} e \textbf{dockdomains.pas}.O bogie.pas consiste no módulo de docagem geométrica  e na unidade dockdomains são determinados os dominios nos três eixos para a simulação da docagem geométrica.
 
+ O trabalho poderá abarcar a paralelização de mais unidades presentes no pacote o que só garante melhorias adicionais à performance do Open Chemera, por exemplo na secção \ref{challenges} é abordada uma paralelização à unidade linegrids.pas, que é a unidade onde é feito o cálculo das regiões de superficie e core dos pares assim como a determinação das grelhas para a superficie 3D dos mesmos, para o efeito de complementar a resolução do desafio distipulado na secção. As principais alterações serã, no entanto, focadas nos dois referidos anteriormente.
+ 
+Face à possibilidade de não existir nenhuma versão do CUDA para programar paralelizações em Free Pascal. %Podemos, no entanto
 
+ Põe-se de lado esta última alternativa em troca de uma outra que recorra à framework OpenCL, que é suportada pelo Lazarus (IDE a utilizar durante a fase de elaboração do tema).
+ 
+Poderão vir a ser implementados para a paralelização das duas unidades, kernels que executam operações de mapeamento, em que o espaço de possibilidades a tratar na primeira fase do BiGGER poderá ser associado a uma estrutura de dados(figura \ref{fig:fig3subfig}), dividida por blocos em que estes últimos serão constituidos por casas indexadas pelo ID da thread correspondente. Pelo que a indexação geral estará associada a uma fórmula que envolva a posição da thread no bloco e o número de bloco. Para cada uma das posições o core do GPU executará a função que determina se a configuração é aceite ou não.
+
+\begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.5\linewidth]{Imagem1}}
+  \caption{Representação gráfica do ID geral de uma thread num array divido por blocos, em CUDA. Adaptações de \cite{Sainio2010CUDAEASYA} \cite{zeller2011cuda}}
+  \label{fig:fig3subfig}
+\end{figure}
+Este esquema de indexação de threads também existe em OpenCL, por invocações próprias na sua sintaxe.
+%continuar
+\textit{Pending, ponderar mais tipos de kernels que possam ser implementados, para fazer operações de redução/scan/stencil}
 
 \section {Desafios}
+\label{challenges}
 Os desafios incidem-se sobre dois pontos:
 \begin{itemize}
-\item{\textbf{Criação das grelhas}}
-\item{\textbf{Pesquisa de sobreposições}}
+\item{\textbf{Criação das grelhas tri-dimensionais}} : 
+Tal como foi elaborado no capitulo anterior, o passo inicial do BiGGER consiste na criação de grelhas tri-dimensionais, de booleanos, que assumem valor 1 ou 0 se a posição respetiva na grelha corresponde a uma posição atómica da proteina. 
+
+Analisando o código que se pode encontrar na unidade dockdomains.pas pode-se verificar que existem uma certa diversidade nas possibilidades de optimização.  
+
+O código presente nesta unidade contém um conjunto de \textit{procedures} que executam cadeias de ciclos for/while, em teoria é possivel paralelizar o dockdomains recorrendo a kernels que executam operações de map, de forma a reduzir a carga de computação.
+
+Paralelizações adicionais poderão ser feitas na unit linegrids.pas que permitem trazer melhorias extra de performance, no entanto serão alterações complementares, segundo a documentação inicial do código fonte da unidade, os segmentos gerados por esta unidade são referenciados apenas ao eixo z, sendo então uma unidade auxiliar para o BiGGER para a indexação da matriz tri-dimensional por parte deste.
+
+\item{\textbf{Pesquisa de sobreposições}} : 
 \end{itemize}
 % section document_structure (end)
 \section{Plano de Trabalhos} % (fold)
