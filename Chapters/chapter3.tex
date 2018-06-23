@@ -11,11 +11,11 @@
 %This Chapter aims at exemplifying how to do common stuff with \LaTeX. We also show some stuff which is not that common! ;)
 %
 %Please, use these examples as a starting point, but you should always consider using the \emph{Big Oracle} (aka, \href{http://www.google.com}{Google}, your best friend) to search for additional information or alternative ways for achieving similar results.
-
+\section {Profiling}
 
 \section{Possibilidades de optimização} % (fold)
 \label{abordagem}
-O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o package \textbf{\textit{docking}} mais precisamente às unidades \textbf{bogie.pas} e \textbf{dockdomains.pas}.O bogie.pas consiste no módulo de docagem geométrica  e na unidade dockdomains são determinados os dominios nos três eixos para a simulação da docagem geométrica.
+O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o package \textbf{\textit{docking}} mais precisamente às unidades \textbf{bogie.pas} e \textbf{dockdomains.pas}. O bogie.pas consiste no módulo de docagem geométrica  e na unidade dockdomains são determinados os dominios nos três eixos para a simulação da docagem geométrica.
 
  O trabalho poderá abarcar a paralelização de mais unidades presentes no pacote o que só garante melhorias adicionais à performance do Open Chemera, por exemplo na secção \ref{challenges} é abordada uma paralelização à unidade linegrids.pas, que é a unidade onde é feito o cálculo das regiões de superficie e core dos pares assim como a determinação das grelhas para a superficie 3D dos mesmos, para o efeito de complementar a resolução do desafio distipulado na secção. As principais alterações serã, no entanto, focadas nos dois referidos anteriormente.
  
@@ -33,7 +33,6 @@ Poderão vir a ser implementados para a paralelização das duas unidades, kerne
 \end{figure}
 Este esquema de indexação de threads também existe em OpenCL, por invocações próprias na sua sintaxe.
 %continuar
-\textit{Pending, ponderar mais tipos de kernels que possam ser implementados, para fazer operações de redução/scan/stencil}
 
 \section {Desafios}
 \label{challenges}

@@ -16,14 +16,17 @@
 %\begin{itemize}
 %% What's the problem?
 %	\item Qual é o problema?
-Na área cientifica da bio informática, o estudo das interações entre as proteinas tem sido objeto de interesse. 
-No entanto conseguir determinar computacionalmente e com precisão como é que as mesmas se unem é dificil. %falta especificar mais
+Na área cientifica da Bio-Informática, o estudo das interações entre as proteinas tem sido objeto de interesse. 
+No entanto conseguir determinar computacionalmente e com precisão como é que as mesmas se unem é dificil. 
+Existem, no entanto diversos métodos e algoritmos para prever o ajuntamento das proteinas. 
+Um desses métodos é o BiGGER, criado pelo prof. Ludwig Krippahl, prof. Nuno Palma do BIAL e outros professores integrados no projeto. 
+Este algoritmo assume caracteristicas que lhe dão uma complexidade temporal inferior aos demais.
 %% Why is it interesting?
-%Conseguir perceber como é que as proteinas interagem implica avanços na con
 %	\item Porque é que ele é interessante?
+%Conseguir perceber como é que as proteinas interagem implica avanços na concepção e desenho de drogas assistido por computador 
 %% What's the solution?
 
-O presente documento aborda uma proposição para a paralelização do algoritmo BiGGER implementado pelo prof. Ludwig Krippahl e outros professores associados à sua criação.
+O presente documento aborda uma proposição para a paralelização do algoritmo BiGGER.
 %	\item Qual é a solução?
  A implementação será feita recorrendo a técnicas de computação acelerada i.e. utilizar o GPU da máquina em que corre o algoritmo para auxiliar o CPU na computação que é necessária. 
  
@@ -31,7 +34,7 @@ O presente documento aborda uma proposição para a paralelização do algoritmo
 %% What follows from the solution?
 Em caso de sucesso, a complexidade futura do algoritmo permitirá a adição de mais vantagens face aos seus concorrentes.
 % O que resulta (implicações) da solução?
-Por consequencia deste aumento de performance, uma proposta de valor para quem pretenda utilizar o open-chemera como ferramenta de trabalho eficiente no estudo das interações entre as proteinas em qualquer máquina que tenha uma placa gráfica com as caracteristicas adequadas.
+Por consequencia deste aumento de performance, uma proposta de valor para quem pretenda utilizar o open-chemera será ter uma ferramenta de trabalho eficiente no estudo das interações entre as proteinas em qualquer máquina que tenha uma placa gráfica com as caracteristicas adequadas.
 %\end{itemize}
 %
 %E agora vamos fazer um teste com uma quebra de linha no hífen a ver se a \LaTeX\ duplica o hífen na linha seguinte…
