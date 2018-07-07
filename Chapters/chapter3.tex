@@ -10,10 +10,40 @@
 
 %This Chapter aims at exemplifying how to do common stuff with \LaTeX. We also show some stuff which is not that common! ;)
 %
-%Please, use these examples as a starting point, but you should always consider using the \emph{Big Oracle} (aka, \href{http://www.google.com}{Google}, your best friend) to search for additional information or alternative ways for achieving similar results.
-\section {Profiling}
+% https://books.google.pt/books?id=q3DvBQAAQBAJ&pg=PA426&lpg=PA426&dq=APOD+cycle&source=bl&ots=KhoY0esEC7&sig=ecXbOBLk49T0mzgr36h1TJ9XF5I&hl=pt-PT&sa=X&ved=0ahUKEwi6g66pqIXcAhVB46QKHVcbBdkQ6AEIXzAL#v=onepage&q=APOD%20cycle&f=false
+\section{Ciclo de desenvolvimento}
+Tendo em conta que no decorrer da elaboração não será desenvolvido código de raiz, mas sim optimizar código existente, através de CUDA ou OpenCL, os esforços a adoptar durante a fase de elaboração seguirão um ciclo de desenvolvimento próprio para programação em GPUs, com quatro fases. Este ciclo denomina-se APOD (\textit{Assess}, \textit{Parallelize}, \textit{Optimize}, \textit{Deploy}) \cite{cudaProgGuide} e consiste em quatro fases(figura \ref{apodFig}):
+\begin{enumerate}
+\item {\textbf{\textit{Assess}}} : Onde é feito um \textit{assessment} ao estado atual do programa, em termos de performance. Nesta fase são determinados os pontos do programa onde este passa mais tempo a executar e identificar os bottlenecks de instruções, fazendo um profile da aplicação para confirmar as  identificações efectuadas. No caso da dissertação, é feito um profile do ficheiro bigger.lpi do open-chemera, como está descrito em \ref{profiling}. 
 
-\section{Possibilidades de optimização} % (fold)
+%Pelo que o esforço inicial para a esta etapa do ciclo já se encontra feito. Foram determinados dois pontos paralelizáveis com GPU, a detalhar em \ref{challenges}.
+
+\item{\textbf{\textit{ Parallelize}}} : Após o \textit{assessment}  referido anteriormente estar concluido, procede-se para a fase de implementação do código para paralelizar os pontos encontrados na fase anterior. De acordo com \cite{saxpy}, existem três possibilidades para implementar acelerações: usar bibliotecas aceleradas, diretivas OpenACC ou recorrer a linguagens para programação em GPUs, como CUDA ou OpenCL. Na elaboração da dissertação é pretendido abordar a primeira e terceira possibilidades, no caso da terceira, existe a possibilidade de usar OpenCL pois é suportado pelo IDE Lazarus.
+
+\item{\textbf{\textit{Optimize}}} : Nesta terceira fase é pretendido aumentar a performance da solução base, inicialmente esta ultima tem de ser determinada executando o programa com um dataset de tamanho adequado. E recorrer às técnicas descritas em \ref{optmi} para maximizar a performance. Também se podem considerar abstrações de outros programas relatados em \ref{gpus1}.
+
+\item{\textbf{\textit{Deploy}}} : A última fase do ciclo consiste em confrontar a performance obtida com as expectativas fundamentadas no início do ciclo. Em caso de não corresponder ao speedup potencial registado na fase inicial, é necessário voltar à fase Assess, recomeçando o ciclo.
+\end{enumerate}
+
+
+     \begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.5\linewidth]{APOD}}
+  \caption{ Diagrama do ciclo de desenvolvimento APOD\cite{cudaProgGuide}.}
+  \label{apodFig}
+\end{figure}
+
+Este ciclo de desenvolvimento será iterado o número de vezes necessário até a performance do BiGGER se enquadrar com os objetivos indicados no capitulo \ref{cap1}.
+\subsection {Profiling}
+\label{profiling}
+Antes de se considerar opções sobre as possibilidades para efectuar a optimização do BiGGER, foi necessário fazer uma averiguação sobre o custo de cada etapa do mesmo em termos de número de chamadas e tempo total de computação. O objetivo é poder determinar zonas de codigo a paralelizar, sendo esta tarefa o acto de fazer profiling a um programa. O profiling será feito aos ficheiros relacionados com o funcionamento do BiGGER, pois existem elementos do open-chemera que não são importantes para o mesmo, como por exemplo o chemera.lpi é o que é necessário compilar e executar no Lazarus para a parte gráfica do open-chemera, não influenciando a parte do BIGGER, que é independente.  No caso do Lazarus é possivel recorrer a duas formas principais para fazer profiling a um programa:
+\begin{itemize}
+\item gprof : Pode-se utilizar o gprof para fazer profiling em Lazarus, gerando um ficheiro de texto com os dados necessários para averiguar quais as funções do ficheiro bigger.lpi que podem representar oportunidades de paraleliação 
+\item LazProf: IDE de profiling para o lazarus, que funciona complementada com o FPProfiler 
+\end{itemize}  
+
+ A abordagem LazProfiler requer uma instalação complexa mas é a alternativa cujo profiling mostra os resultados com qualidade superior, sendo necessário apenas ordenar na interface do programa a execução do programa. A alternativa é usar o gprof, que é suportado pelo compilador FreePascal pelo que não requer uma instalação com o nivel de complexidade da do LazProfiler, no entanto os resultados não assumem a mesma qualidade do LazProfiler.
+\subsection{Possibilidades de optimização} % (fold)
 \label{abordagem}
 O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o package \textbf{\textit{docking}} mais precisamente às unidades \textbf{bogie.pas} e \textbf{dockdomains.pas}. O bogie.pas consiste no módulo de docagem geométrica  e na unidade dockdomains são determinados os dominios nos três eixos para a simulação da docagem geométrica.
 
@@ -24,14 +54,13 @@ Face à possibilidade de não existir nenhuma versão do CUDA para programar par
  Põe-se de lado esta última alternativa em troca de uma outra que recorra à framework OpenCL, que é suportada pelo Lazarus (IDE a utilizar durante a fase de elaboração do tema).
  
 Poderão vir a ser implementados para a paralelização das duas unidades, kernels que executam operações de mapeamento, em que o espaço de possibilidades a tratar na primeira fase do BiGGER poderá ser associado a uma estrutura de dados(figura \ref{fig:fig3subfig}), dividida por blocos em que estes últimos serão constituidos por casas indexadas pelo ID da thread correspondente. Pelo que a indexação geral estará associada a uma fórmula que envolva a posição da thread no bloco e o número de bloco. Para cada uma das posições o core do GPU executará a função que determina se a configuração é aceite ou não.
-
-\begin{figure}[ht]
+Este esquema de indexação de threads também existe em OpenCL, por invocações próprias na sua sintaxe.
+     \begin{figure}[ht]
   \centering
     {\includegraphics[width=0.5\linewidth]{Imagem1}}
   \caption{Representação gráfica do ID geral de uma thread num array divido por blocos, em CUDA. Adaptações de \cite{Sainio2010CUDAEASYA} \cite{zeller2011cuda}}
   \label{fig:fig3subfig}
 \end{figure}
-Este esquema de indexação de threads também existe em OpenCL, por invocações próprias na sua sintaxe.
 %continuar
 
 \section {Desafios}
@@ -49,10 +78,11 @@ Paralelizações adicionais poderão ser feitas na unit linegrids.pas que permit
 
 \item{\textbf{Pesquisa de sobreposições}} : 
 \end{itemize}
+\textit{Pending Executar o profiling e apresentar resultados (1 Página com uma tabela)}
 % section document_structure (end)
 \section{Plano de Trabalhos} % (fold)
 \label{sec:dealing_with_bibliogrpahy}
-
+\textit{Gantt chart?}
 % section dealing_with_bibliogrpahy (end)
 
 

@@ -5,8 +5,14 @@
 %%
 %% Chapter with the template manual
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Estado-da-arte}
-\label{cha:stateOfTheArt}
+\chapter{Estado da arte}
+%O relatório deverá incluir um resumo!do!estado!da!arte onde,!de!acordo!com!o!contexto!em!que!se!realiza!o!
+%trabalho,! deverão! ser! referidos! os! trabalhos! relacionados! com! aquele! que! se! pretende! executar,!
+%descrevendoHse!os!objectivos,!conceitos!e!tecnologia!utilizados,!resultados!obtidos!e!as!suas!limitações,!bem!
+%como! a! relação! entre! eles;! e/ou! as! alternativas! utilizadas! para! a! resolução! do! problema! proposto,! ou!
+%problemas! similares,!incluindo!as! tecnologias! utilizadas!e!as! ferramentas! que!a!incorporam,! bem! como!as!
+%eventuais!limitações!a!ultrapassar!no!trabalho!a!realizar
+\label{cap2}
 %{\LARGE \textbf{~\\These instructions are outdated! Please see also the “template.tex” file!\\}}
 %
 %This chapter describes how to use the \LaTeX\ \novathesis\ template (and the “\novathesisclass” class file).
@@ -22,54 +28,41 @@
 %
 %Now, let's go to a major issue for Windows users.  Characters have to be encoded in files as numbers, and that is how character encodings were born. ASCII and EBCDIC standards are long lost in the past.  The world now uses UTF-8.  Well, not all the world… Windows is still stick in its \emph{codepages}, and “latin1” is what windows uses as the codepage for Western Europe. This messes up with the template. Please be sure you use an editor with UTF-8 support.  \emph{Go to the preferences/options/… of your text editor and set up its default file encoding as UTF-8.}
 
+
 % section introduction (end)
 \section{Docking}
-\subsection{Modelos de docagem em relação à rigidez da superficie}
+\subsection{Conceitos de docking em relação à rigidez da superficie}
 \label{classi}
-Com o passar do tempo cada vez mais algoritmos e respetivas adaptações para simular a docagem dos complexos de proteinas têm surgido, adoptando modelos que formulam hipóteses em relação às caracteristicas dos elementos envolventes. 
+Com o passar do tempo cada vez mais algoritmos e respetivas adaptações para simular o docking dos complexos de proteinas têm surgido, adoptando modelos que formulam hipóteses em relação às caracteristicas dos elementos envolventes. 
 
 Um algoritmo pode ser classificado em função da forma que trata a rigidez  da superficie dos pares de proteinas a juntar ou até mesmo pelo modelo matemático que os algoritmos seguem, como por exemplo se aplicam a Fast Fourier Transform ou não.
 
-Serão abordadas nas próximas subsecções 3 modelos de docagem: flexivel, semi-flexivel e rigida. 
+Serão abordadas nas próximas subsecções 3 modelos de docking: flexivel, semi-flexivel e rigida. 
 
 %Estes três conceitos são necessários para que se possa entender melhor os algoritmos nas secções seguintes, já que as suas complexidades dependem em certa forma da maneira como tratam a flexibilidade dos pares de proteinas e por consequência do número de dimensões que o espaço solução irá ter assim como a qualidade do conjunto solução encontrado.
 
 
-	\subsubsection{Docagem Flexivel} Em que ambos os complexos receptor e ligando são considerados como sendo corpos flexiveis e adaptáveis sendo, no entanto, a mesma flexibidade interpretada pelo algoritmo de forma simplificada ou limitada, e por consequência pode-se aplicar um modelo através de simulações de docagem.
+	\subsubsection{Docking flexivel} Em que ambos os complexos receptor e ligando são considerados como sendo corpos flexiveis e adaptáveis sendo, no entanto, a mesma flexibidade interpretada pelo algoritmo de forma simplificada ou limitada, e por consequência pode-se aplicar um modelo através de simulações de docking.
 
-	\subsubsection{Docagem Semi-Flexivel} Um dos corpos é considerado rigido e o outro não, em situações normais este tipo de algoritmos trata o ligando como se fosse a proteina flexivel, já que este é mais pequeno do que o receptor, tendo assim uma maior probabilidade de mudar a sua forma, outra justificação tem a ver com os custos de computação serem mais baixos do que se considerarmos os receptores como flexiveis.
+	\subsubsection{Docking semi-flexivel} Um dos corpos é considerado rigido e o outro não, em situações normais este tipo de algoritmos trata o ligando como se fosse a proteina flexivel, já que este é mais pequeno do que o receptor, tendo assim uma maior probabilidade de mudar a sua forma, outra justificação tem a ver com os custos de computação serem mais baixos do que se considerarmos os receptores como flexiveis.
 
-	\subsubsection{Docagem Rigida} 
-	O par é considerado como sendo rigido na sua integridade, sendo também considerado que na docagem entre os dois corpos uma das proteinas irá acabar por penetrar a outra o que leva a que se tenha de adaptar o conjunto de soluções para o problema em seis 		dimensões de liberdade, 3 para a rotação e 3 para a translação. %cite 
+	\subsubsection{Docking rigido} 
+	O par é considerado como sendo rigido na sua integridade, sendo também considerado que no docking entre os dois corpos uma das proteinas irá acabar por penetrar a outra o que leva a que se tenha de adaptar o conjunto de soluções para o problema em seis 		dimensões de liberdade, 3 para a rotação e 3 para a translação. %cite 
 
 Apesar de se considerarem as superficies de ambos como rigidos, considera-se que ocorrem variações na superficie permitindo que haja penetrações inter-moleculares.
 
-Este modelo tem a vantagem a ser o mais rápido dos 3 a considerar, sendo capaz de explorar as superficies de ambos os elementos e traduzir para uma base de dados de docagem \cite{halperin}.
+Este modelo tem a vantagem a ser o mais rápido dos 3 a considerar, sendo capaz de explorar as superficies de ambos os elementos e traduzir para uma base de dados de docking \cite{halperin}.
 
-
-\subsection{Dinamica molecular}
-
-
-
-\subsection{Fast Fourier Transform}
-Algoritmo baseado em previsões geométricas sobre o complexo formado após a interação entre as proteinas, representando o método a partir do qual ocorreram adaptações que levaram origem à criação do BiGGER \cite{biggerPaper}.
-É utilizado em muitos softwares especificos para \textit{protein docking} ( FTDock, 3D-Dock,GRAMM, ZDOCK,..)\cite{geometry}. 
-
-A origem deste método remonta ao artigo de Katchalski Katzir et al \cite{katchalski1992} onde se considera que ambos os pares são corpos rigidos, o que no âmbito do ponto \ref{classi} pode-se assumir como docagem rigida. 
-
- À semelhança do BiGGER, este método também recorre a uma estimativa da complementaridade entre as superficies dos pares que compõem a PPI, apenas existe como requisito o conhecimento da estrutura tri-dimensional destes.
- 
+\subsection{Métodos usados em docking}
+\subsubsection{Transformada de Fourier em docking}
+\label{fft}
+Existe uma adaptação da Transformada de Fourier para docking entre proteinas. Esta adaptação é usada em ferramentas de docking que consideram a complementaridade de superficie entre os pares de proteinas como função de score para determinar os candidatos à fase 2 do docking. Mais precisamente na criação das grelhas geométricas para comparação com as coordenadas atómicas do receptor. três exemplos de ferramentas abordadas nesta secção são o FTDock, GRAMM e ZDOCK que são especificos para interações entre proteinas.
+A origem do uso do FFT no docking remonta ao artigo de Katchalski Katzir et al \cite{katchalski1992} onde se considera que ambos os pares são corpos rigidos. Também foi com base no estudo deste artigo que as adaptações que levaram ao BiGGER foram efectuadas\cite{biggerPaper}.
  A metodologia com que são determinadas as possibilidades consiste, de forma resumida, nos passos:
 \begin{enumerate}
-	\item Considerando duas moléculas $a$ e $b$, correspondentes  ao receptor e ao ligando, é determinada uma projeção das coordenadas atómicas de ambos para uma grelha tri-dimensional ($N^{3}$). 
+	\item Determinação da região de fronteira, em que a função discreta determinada no ponto anterior é estendida para suportar os pontos fronteiriços: 1 neste passo é atribuido a coordenadas atómicas localizadas na fronteira, $\rho$ associada a coordenadas internas e 0 a externas. A esta função é designada função distreta de Fourier (DFT).
 	
-	São também determinadas  duas funções discretas sobre as coordenadas, em que cada ponto da grelha assume o valor 0 ou 1, se a coordenada corresponde a uma posição interna à molécula e 0 caso contrário. 
-	
-	O limite para atribuição dos valores está definido por um raio r associado a uma nuvem de van der waals, que assume uma curvatura semelhante à que se pode determinar na figura \ref{fig:fig2subfig}.
-	
-	\item Determinação da região de fronteira, em que a função discreta determinada no ponto anterior é estendida para suportar os pontos fronteiriços: 1 neste passo é atribuido a coordenadas atómicas localizadas na fronteira, uma variável associada a coordenadas internas e 0 a externas. A esta função é designada função distreta de Fourier (DFT).
-	
-	\item É determinada a função de correlação associada às orientações entre as duas moléculas, sendo considerado que a molécula $a$ está fixa enquanto $b$ pode ter orientações variadas. Sobre um eixo $xyz$ os ângulos que a orientação do ligando pode formar variam entre $360x360x180\Delta^{3}$.
+	\item É determinada a função de correlação associada às orientações entre as duas moléculas, sendo considerado que a molécula $a$ está fixa enquanto $b$ pode ter orientações variadas. Sobre um eixo $xyz$ os ângulos que a orientação do ligando pode formar variam entre $360x360x180\Delta^{3}$, sendo $\Delta$ o intervalo de amostragem rotacional.
 
 \end{enumerate} 
 Em termos de complexidade temporal, executar estes passos assume uma ordem de complexidade $O(N^{3}*log_2(N^{3}))$\cite{teseProf}.
@@ -78,35 +71,41 @@ Considerou-se fazer um estudo deste método importante pois tal como foi explici
 
 Tendo em conta que os passos aqui descritos e as fases do BiGGER descritas na secção \ref{biggerAlg} são muito semelhantes, para se perceber como paralelizar o BiGGER é necessário entender como este funciona, e por consequência, como funciona o FFT. 
 
-Outra razão para se ter feito um estudo sobre esta técnica aborda poder justificar onde é que o BiGGER é mais forte do que o FFT aquando na descrição de resultados obtidos na fase da elaboração.
-
- É esperado que o Open-chemera com o BiGGER paralelizado assuma uma perfomance superior a qualquer um dos casos estudados, que utiliza cuFFT . 
+Outra razão para se ter feito um estudo sobre esta técnica aborda poder justificar onde é que o BiGGER é mais forte do que as ferramentas que usam FFT aquando na descrição de resultados obtidos na fase da elaboração.
  
-% Diferença entre o bigger e os demais, oportunidades de implementação calcular interações em paralelo, criação das matrizes tri dimensionais. 
+% Diferença entre o bigger e os demais, oportunidades de implementação calcular iterações em paralelo, criação das matrizes tri dimensionais. 
 
-\subsection{O algoritmo BiGGER para docagem de proteinas}
-\label{biggerAlg}
-Este algoritmo (acrónimo para \textit{Bimolecular complex Generation with Global Evaluation and Ranking}) \cite{teseProf} de acordo com a classificação referida no ponto \ref{classi} enquadra-se na doutrina de docagem rígida\cite{biggerPaper}.
+%BiGGER is designed to integrate as much information as available into the docking procedure.
+%Therefore, the search stage is implemented using constraint programming techniques [30] to efficiently
+%search an order of 1015 potential configurations resulting from the typical translation and rotation
+%steps of 1 Å and 15˝
+%. As is generally the case with protein-protein docking algorithms, the main
+%Molecules 2016, 21, 1037 3 of 19
+%scoring parameter at this stage is surface contact area. However, BiGGER can additionally constrain
+%the search space in order to model information regarding potential contacts or distances between parts
+%of the proteins. These can come either from experimental data, as some examples in the Case Studies
+%section illustrate, or from other sources, such as assumptions regarding the interaction or even contact
+%predictions [31]
 
-Permite resolver o problema de conseguir prever o ajuntamento dos complexos proteicos, consistindo essencialmente em dois passos: o primeiro efectua uma redução de possiveis configurações resultantes de passos de translação e rotação numa magnitude de cerca de $10^{15}$ configurações para poucos milhares das anteriores, através do algoritmo BoGIE relatado no ponto \ref{bogieAlg}.
+\subsubsection{Hashing Geométrico }
+Este método é shape-explicit- as superficies de ambos os elementos do par são quantificadas e representadas por valores binários nas superficies \textit{core} e \textit{surface}.
 
-A segunda fase do algoritmo consiste em aplicar metodologias de aprendizagem automática de modo a que se possa prever qual das configurações resultantes corresponde ao melhor ajuste entre os dois complexos, isto é, a que tem o score mais elevado.
- 
-Em termos de complexidade temporal, este algoritmo assume valores mais optimais ($O(N^{2,8})$) do que os algoritmos que recorrem ao Fast Fourier Transform. 
+A metodologia deste método divide-se em dois passos: Pré-processamento e Reconhecimento \cite{geometry}.
+A fase de pre-processamento consiste em identificar os pontos criticos na superficie do ligando e a partir destes definir frames de coordenandas locais. Sobre estes frames, serão feitas indexações com base nos pontos criticos vizinhos a um selecionado. Os indices serão usados numa hash table que contem as coordenadas locais do frame corrente (o processo é iterativo). Repete-se o procedimento para o elemento receptor. Com as coordenadas locais de ambos determinadas, procede-se para a fase de reconhecimento, em que se usa as coordenadas locais do receptor para confrontar uma correspondência entre as coordenadas do ligando, através da hash table. Se houver demasiadas correspondências, existe uma grande possibilidade de as curvaturas de superficie serem semelhantes, e é feita uma verificação extra com esse ambito \cite{prediction}. Na figura \ref{geometricFig}, pode-se consultar uma sintetização sobre as etapas que o método desempenha. 
+A principal vantagem deste método em relação aos outros é substituir todos os passos que os demais métodos executam por uma verificação numa hash table, o que introduz rapidez em termos de computação efectuada. 
 
-O motivo pelo qual das duas espécies de algoritmos, o BiGGER assume-se com perfomance superior em termos de computação, deve-se ao facto de o BiGGER ter sido implementado com diversas optimizações face aos algoritmos FFT. 
+A complexidade deste método é $O(N^{3})$, sendo $N$ o número de pontos criticos a considerar. Os tempos de execução são baixos, sendo na ordem dos minutos independentemente da complexidade da previsão do docking \cite{halperin}. No entanto a complexidade temporal é superior à do BiGGER ($O(N^{2,8})$), pelo que em teoria este último assume tempos de execução ainda menores.
 
-Sendo uma das optimizações o uso de uma heurística mais eficiente no passo da eliminação de possibilidades: descarta situações em que existem sobreposições entre cores ou até mesmo situações que não cumprem com os limites impostos nas restrições introduzidas \cite{biggerPaper}. 
+\begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.5\linewidth]{geometricHashingScheme}}
+  \caption{Fluxograma sobre o geometric hashing. Tirado de \cite{geometry}}
+  \label{geometricFig}
+\end{figure}
 
-O tempo de execução do algoritmo, segundo os autores do mesmo, estava situado entre as 2H e as 8H, dependendo do par de proteinas em contraste com o tempo de execução para FTT que ronda as 6H, numa máquina com um CPU do ano de 2000 (Intel Pentium II 450 MHz dispõe apenas 1 core)\cite{biggerPaper}. 
-
-Segundo a lei de Moore, o número de transistors presentes num CPU duplica a cada 2 anos, e por consequência a capacidade computacional, pelo que num computador em 2018 o tempo de execução do BiGGER provavelmente será menor, demorando entre 1H e 4H por exemplo.
-
-
-
-\subsection{BoGIE}
+\subsubsection{BoGIE}
 \label{bogieAlg}
-Acrónimo para \textit{Boolean Geometric Interaction Evaluation}\cite{teseProf} \cite{biggerPaper}, é um algoritmo de pesquisa em grelha utilizado na primeira fase do BiGGER, que é referido no ponto seguinte, mais precisamente na amostragem da população total de configurações possiveis para milhares.
+Acrónimo para \textit{Boolean Geometric Interaction Evaluation}\cite{teseProf} \cite{biggerPaper}, é um método de pesquisa em grelha utilizado na primeira fase do BiGGER, que é referido no ponto \ref{biggerAlg}, mais precisamente na amostragem da população total de configurações possiveis para milhares.
 
  Existem dois processos principais a considerar, sendo o primeiro a definição de uma matriz tridimensional de booleanos em que cada posição da matriz representa uma parcela da forma que o complexo assume.
  
@@ -120,7 +119,7 @@ Os elementos celulares que ocupam a matriz de superficie são aqueles que na mat
  
  A forma de garantir que se consegue obter a superficie molecular da proteina é através da operação lógica XOR (OU exclusivo), que terá como output 1 apenas nos pontos da fronteira, pois é aqui que o resultado do XOR associado aos dois pontos selecionados dá o valor verdadeiro, já que os valores entre as duas células são diferentes e falso se forem iguais.
  
-Sendo assim a complexidade deste algoritmo está associada mais com o primeiro passo do que com o segundo, já que este ultimo depende do output da matriz resultante do primeiro passo e apenas executa um conjunto de operações XOR o que não é assim tão custoso em termos de memória e tempo comparando com a medição para cada célula de uma distância.
+Sendo assim a complexidade deste algoritmo está associada mais com o primeiro passo do que com o segundo, já que este ltimo depende do output da matriz resultante do primeiro passo e apenas executa um conjunto de operações XOR o que não é assim tão custoso em termos de memória e tempo comparando com a medição para cada célula de uma distância.
 
 \begin{figure}[ht]
   \centering
@@ -129,130 +128,234 @@ Sendo assim a complexidade deste algoritmo está associada mais com o primeiro p
   \label{fig:fig2subfig}
 \end{figure}
 
-De notar, no entanto, que ambos os passos podem ser optimizados recorrendo ao GPU, no capitulo \ref{cha3} serão detalhadas possiveis abordagens à paralelização desta etapa do BiGGER, podendo trazer melhorias para além do uso do XOR.
+De notar, no entanto, que ambos os passos podem ser optimizados recorrendo ao GPU, no capítulo \ref{cha3} serão detalhadas possiveis abordagens à paralelização desta etapa do BiGGER, podendo trazer melhorias para além do uso do XOR.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ferramentas para Docking}
+\subsubsection{BiGGER}
+\label{biggerAlg}
+O BiGGER\cite{biggerPaper} é um algoritmo para docking entre proteinas que considera a superficie destas como rigida. Faz parte do software para docking Open-Chemera.
+%Este algoritmo  representa de acordo com a classificação referida no ponto \ref{classi} enquadra-se na doutrina de docking rigido.
 
-\subsection{Geometric Hashing}
-Este algoritmo é shape-explicit, ao contrário do BiGGER, que é surface-explicit - as superficies de ambos os elementos do par são quantificadas e representadas por valores binários nas superficies core e surface.
+Este algoritmo permite consiste em dois passos: o primeiro efectua uma redução de possiveis configurações resultantes de passos de translação e rotação numa magnitude de cerca de $10^{15}$ configurações para poucos milhares das anteriores, através do algoritmo BoGIE relatado no ponto \ref{bogieAlg}.
 
-A metodologia deste método divide-se em dois passos: Pré-processamento e Reconhecimento \cite{geometry}.
-A fase de pre-processamento consiste em identificar os pontos criticos na superficie do ligando e a partir destes definir frames de coordenandas locais. Sobre estes frames, serão feitas indexações com base nos pontos criticos vizinhos a um selecionado. Os indices serão usados numa hash table que contem as coordenadas locais do frame corrente (o processo é iterativo). Repete-se o procedimento para o elemento receptor. Com as coordenadas locais de ambos determinadas, procede-se para a fase de reconhecimento, em que se usa as coordenadas locais do receptor para confrontar uma correspondencia entre as coordenadas do ligando, através da hash table. Se houver demasiadas correspondencias, existe uma grande possibilidade de as curvaturas de superficie serem semelhantes, e é feita uma verificação extra com esse ambito \cite{prediction}. Na figura \ref{geometricFig}, pode-se consultar uma sintetização sobre as etapas que o método desempenha. 
-A principal vantagem deste método em relação aos outros é substituir todos os passos que os algoritmos anteriores executam por uma verificação numa hash table, o que introduz rapidez em termos de computação efectuada. 
+A segunda fase do algoritmo consiste em aplicar metodologias de aprendizagem automática de modo a que se possa prever qual das configurações resultantes corresponde ao melhor ajuste entre os dois complexos, isto é, a que tem o score mais elevado.
+ 
+Em termos de complexidade temporal, este algoritmo assume valores mais optimais ($O(N^{2,8})$) do que os algoritmos que recorrem ao Fast Fourier Transform. 
 
-A complexidade deste método é $O(N^{3})$, sendo $N$ o número de pontos criticos a considerar. Os tempos de execução são baixos, sendo na ordem dos minutos independentemente da complexidade da previsão da docagem \cite{halperin}. No entanto a complexidade temporal é superior à do BiGGER ($O(N^{2,8})$), pelo que em teoria este último assume tempos de execução ainda menores.
+O motivo pelo qual das duas vertentes de algoritmos, o BiGGER assume-se com perfomance superior em termos de computação, deve-se ao facto de o BiGGER ter sido implementado com diversas optimizações face aos algoritmos FFT. 
 
-\begin{figure}[ht]
-  \centering
-    {\includegraphics[width=0.5\linewidth]{geometricHashingScheme}}
-  \caption{Fluxograma sobre o geometric hashing.Tirado de \cite{geometry}}
-  \label{geometricFig}
-\end{figure}
-%duvida geometric hashing assume limitações?
-%Diferenças entre o bigger e o Geometric hashing
-\subsection{ZDOCK}
-%amanha...
+Sendo uma das optimizações o uso de uma heurística mais eficiente no passo da eliminação de possibilidades: descarta situações em que existem sobreposições entre \textit{cores} ou até mesmo situações que não cumprem com os limites impostos nas restrições introduzidas . 
 
+O tempo de execução do algoritmo, segundo os autores do mesmo, estava situado entre as 2H e as 8H, dependendo do par de proteinas em contraste com o tempo de execução para FTT que ronda as 6H, numa máquina com um CPU do ano de 2000 (Intel Pentium II 450 MHz dispõe apenas 1 core). 
+
+Segundo a lei de Moore, o número de transistors presentes num CPU duplica a cada 2 anos, e por consequência a capacidade computacional, pelo que num computador em 2018 o tempo de execução do BiGGER provavelmente será menor, demorando entre 1H e 4H por exemplo.
+\subsubsection{ZDOCK}
+%introdução ZDOCK
+O ZDOCK é um programa de docking entre pares de proteinas que usa FFT para optimizar os cálculos respetivos às caracteristicas das proteinas complementaridade de formato, electroestática e dissolvação (desolvation), sendo este o aspeto que faz com que o ZDOCK tenha uma performance positiva. O processo de funcionamento deste algoritmo foi abordado em \cite{zdock}.
+%COmo funciona
+Aborda a pesquisa de combinações na primeira fase do docking através de uma grelha de pontos. Ao contrário do BiGGER, que considera a superficie e o core, o ZDOCK considera apenas os pontos circundantes ao receptor. O número total de pontos desta grelha que correspondem a pontos do ligando contribuem para uma função de score especifica chamada GSC (Grid-based Shape Complementarity), tem ainda uma subtração que consiste na penalização de confronto entre os pares de proteinas \cite{chen2002docking}. Existe ainda a função de score PSC (Pair-based Shape Complementarity) que aplica o mesmo raciocinio para o GSC, inclusive a penalização, mas apenas considera os pares de átomos receptor-ligando que se encontram a uma dada distância.
+Existem quatro possibilidades para as funções de score: combinar as ditas caracteristicas químicas das proteinas (GSC + dissolvação + eletrostatica entre o par) numa só função, usar apenas PSC, combinar está ultima com a dissolvação e substituir a primeira alternativa referida pelo PSC. Estas combinações são consideradas pois apenas usar GSC ou PSC não garante as soluções mais precisas, pelo que é necessário existir uma função de score com as complementações referidas. \par
+%Performance
+%Diferenças em relação ao BiGGER
+A diferença entre esta ferramenta e o BiGGER foca-se essencialmente na complexidade temporal: o ZDOCK por recorrer a FFT, requer a mesma complexidade temporal deste, tendo o BiGGER a complexidade temporal que garante a performance superior.
+No entanto, a grande diferença entre os dois foca-se no modo como é simulada o docking. O ZDOCK faz comparações entre os pontos da grelha, quer para determinar uma correspondencia, quer para comparar a distancia entre os elementos de um dado par de atomos  para determinar os valores da função de score. O BiGGER, por outro lado, apenas faz operações booleanas sobre as suas grelhas com os pontos de superficie.  
+
+%The complete docking package, named
+%FTDOCK, consists of approximately 3,500 lines of
+%Fortran 77 and Perl 5.0 (Wall & Schwartz, 1991)
+%code designed to run under the UNIX operating
+%system
+%A complete docking experiment
+%including post-®ltering requires approximately
+%six hours of CPU time using eight
+%processors simultaneously
+%The ftdock algorithm is based on that of Katchalski-Katzir [4]. It discretises the two
+%molecules onto orthogonal grids and performs a global scan of translational and rotational
+%space. In order to scan rotational space it is necessary to rediscretise one of the molecules
+%(for speed the smaller) for each rotation. The scoring method is primarily a surface complementarity
+%score between the two grids, and this is shown in Figure 2. To speed up the surface
+%complementarity calculations, which are convolutions of two grids, Fourier Transforms are
+%used. This means that the convolutions are replaced with multiplications in Fourier space,
+%and despite having to perform the forward and reverse Fourier Transforms, this decreases
+%the overall computation required. The surface complementarity was the only score used in
+%the original method. The original work on ftdock by Gabb [2] found it a useful addition to
+%include an electrostatic filter, and this is again implemented in the current version (though
+%it can be turned off).
+%The additional constraint of removing predictions
+%with unfavourable electrostatic interactions
+%markedly improves the ranking of correctly docked
+%structures in the global search
+\subsubsection{FTDock}
+Esta ferramenta foi implementada em Perl e Fortran, apenas disponivel para sistemas operativos UNIX \cite{ftdock}.
+Em termos de docking, usa a complementaridade de formato e eletroestática como função de score assim como a técnica de correlação de matrizes por FFT descrita no ponto \ref{fft}, sendo uma ferramenta semelhante ao ZDOCK. No entanto para o FTDock desenvolveram-se melhorias em relação à versão do FFT introduzida em 1992. É considerado na função de score sobre a eletroestatica do par um constrangimento adicional, de forma a aumentar a precisão do algoritmo na fase de pesquisa global.
+O tempo de execução para um docking completo (são completadas as duas fases) demorava seis horas para oito processadores em simultaneo. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %secção GPU
-\section{ O uso de GPU como ferramenta auxiliar}
+%GPGPU stands for General-Purpose computation on Graphics Processing Units, also known as GPU Computing. Graphics Processing Units (GPUs) are high-performance many-core processors capable of very high computation and data throughput.  Once specially designed for computer graphics and difficult to program, today’s GPUs are general-purpose parallel processors with support for accessible programming interfaces and industry-standard languages such as C.  Developers who port their applications to GPUs often achieve speedups of orders of magnitude vs. optimized CPU implementations. The goal of GPGPU.org is to catalog the current and historical use of GPUs for general-purpose computation, and to provide a central resource for GPGPU software developers.
+\section{O GPU}
 \label{gpus}
-GPU( \textit{Graphical Processor Unit}) consiste na unidade de processamento gráfico existente na placa gráfica instalada em qualquer computador, sendo especializada em processamento gráfico, mais precisamente renderização de gráficos 3D. 
+GPU ( \textit{Graphical Processor Unit}) consiste na unidade de processamento gráfico existente na placa gráfica instalada em qualquer computador, sendo especializada em processamento gráfico, mais precisamente renderização de gráficos 3D.
 
- No entanto o GPU também é adequado para processamentos alternativos à renderização para o gaming, que são igualmente intensivos demais para o CPU. Exemplos de aplicações podem variar de cálculo financeiro até aplicações bio-informáticas, como é o caso do docking.
+ No entanto o GPU também é adequado para processamentos alternativos, que, tal como a rederização de gráficos 3D, são igualmente intensivos demais para o CPU. Na actualidade os GPUs oferecem suporte para interfaces de programação e linguagem de alto nível sendo possivel a quem recorra à execução de um programa no GPU alcançar valores de speedup superiores em relação a uma implementação para CPU optimizada. O uso do GPU para este tipo de processamentos é referido como \textit{General-purpose computation on graphics processing units} (GPGPU)\cite{gpgpu}. Exemplos de aplicações podem variar deste cálculo financeiro até aplicações bio-informáticas, como é o caso do docking. É possivel encontrar um panorama detalhado sobre as aplicações da computação de alta performance, sobre forma de catálogo, em \cite{cudaIntro}. Algumas das aplicações presentes no catalogo referido são mencionadas na secção \ref{gpus1}. 
  
-Consegue ser mais poderoso a executar instruções com custos de complexidade temporal elevado do que necessariamente o CPU, que tem um número de cores muito menor do que o GPU. \cite{nvidia2011nvidia}
-
- Um programador que  pretenda implementar uma paralelização para a versão sequêncial de um dado programa, recorrendo ao CPU, necessita de conhecimentos de programação com \textit{threads} assim como gerir o acesso exclusivo a variáveis partilhadas entre as mesmas, o que pode ser feito por gestão de locks ou por instruções atómicas. 
  
- O resultado consiste num programa paralelizado mas com um speedup limitado comparando com uma solução que use aceleradores no GPU.
- 
-  \begin{figure}[ht]
-  \centering
-    {\includegraphics[width=0.5\linewidth]{cpuvsgpu}}
-  \caption{Esquema ilustrativo da diferença entre o hardware do CPU e do GPU, demonstrando também a diferença de cores entre os 2. Imagem da NVIDIA}
-  \label{fig:fig2subfig}
-\end{figure}
+\subsection{Arquitectura e Modelo de Execução}
+\label{gpuArch}
+Tal como os CPUs, os GPUs também seguem uma arquitetura. Os aspetos essenciais não diferem entre arquiteturas, ou seja, o que está presente numa arquitetura de um GPU AMD também existe num GPU NVIDIA. No ambito desta dissertação serão utilizados GPU de fabrico NVIDIA pelo que é com base nestes que serão descritos ambas arquitetura e funcionamento de um GPU em geral.  No caso dos GPUs fabricados pela NVIDIA, a arquitetura mais recente ( em 2018) é a Volta\cite{voltaArch} que está presente nos GPUs de modelo Tesla V100 (figura \ref{voltaArch}). Esta nova arquitetura traz diversas optimizações de hardware e lógicas face às versões anteriores, eg. Pascal, Maxwel e Kepler, para desempenho em computações na área do deep learning. Também é uma arquitetura própria para acelerações relacionadas com aplicações que usam data-centers.
 
-\subsection{Arquitetura do GPU}
 
- O GPU acaba por ser uma ferramenta mais potente para paralelizar programas já que a sua arquitetura é consistente em uma quantidade variável de streamming multi-processadores (\textit{streaming multi-processors}) \cite{ritchiew}. Que por si só têm um conjunto de processadores escalares (SPs) que são também conhecidos como os cores do GPU. É possivel ter até 512 cores no total, se a arquitetura for da espécie Fermi. \cite{wittenbrink2011fermi}. Está presente ainda uma zona de memória global que pode variar entre MBs e GBs, e pode ser partilhada entre os diversos SPs.
-
- A arquitetura do GPU, conceptualmente, pode se dividir em duas componentes : 
- % Developers can query the compute capability by calling cudaGetDeviceProperties() and examining cudaDeviceProp.major and cudaDeviceProp.minor, or by calling the driver API function cuDeviceComputeCapability().
- 
+Generalizando as arquiteturas têm os seguintes elementos:
 \begin{itemize}
-\item \textbf{Streaming Multiprocessors} : responsáveis por executar os CUDA kernels. Funcionam como as \textit{cores} do CPU mas com caracteristicas diferentes. Têm ciclos de relógio mais baixos, mas suportam paralelismo ao nível de instrução. A evoluição dos SMs tem sido notada desde o aparecimento de hardware capaz de executar CUDA, em 2006. Em que se vão melhorando as capacidades das suas componentes: A destacar a quantidade de registos que os SMs vão dispondo, a cache L1 e o número de \textit{cores} de execução \cite{wilt_2013}.  
-\item \textbf{Caches e memória}: Em que existem dois níveis de cache a considerar. As caches L1 são usadas para melhorar a latência das operações globais de escrita e leitura e como especificado no ponto anterior, estas fazem parte dos SMs. Existe ainda uma cache partilhada L2 para complementar a presença das L1. A cache L2 é uma cache de escrita/leitura com uma politica de substituição write-back . Esta cache responde a pedidos de instruções load, store assim como instruções atómicas de ambos SM e respetivas caches L1, preenchendo  de forma igual as respetivas caches \cite{nickolls2010gpu}  Os beneficios da cache L2 para o CUDA regem-se pelo aumento do armazenamento para instruções de load e store globais \cite{wittenbrink2011fermi}.  %continua...
+\item \textbf{Streaming Multiprocessors} : Cada GPU tem uma quantidade variável de SMs (\textit{streaming multi-processors}). Os SMs têm ainda um conjunto de processadores escalares (SPs) que são também conhecidos como os \textit{cores} do GPU. Assumem a função de executar os kernels (sobre estes últimos é feita uma descrição detalhada na sub-secção \ref{exec}). Têm ciclos de relógio mais baixos, mas suportam paralelismo ao nível de instrução. As componentes dos SMs vão sendo melhoradas face aos SMs de arquiteturas anteriores. A destacar o número de \textit{cores} (registos) que os SMs vão dispondo, a cache L1 e o número de \textit{cores} de execução \cite{wilt_2013}. Cada SM tem uma memória partilhada onde os dados que lá estão são partilhadas entre as threads desse SM.Os SMs são agrupados em partições de hardware com tamanho igual denominados GPU processing clusters (GPCs) e o número de GPCs presentes num GPU depende da arquitetura.  \par
+Na arquitetura Volta, cada um dos 84 SMs presentes, estão partidos em quatro blocos de processamento como se pode ver na figura \ref{voltaSM}. Cada um destes blocos é composto por 16 cores FP32, 8 cores FP64 e 16 cores INT32. Cada SM é capaz de executar no máximo 2048 threads. O GV100 encontra-se dividido em 6 GPCs, cada um destes GPCs contem 14 SMs.
+Foram aplicadas optimizações nos SMs para a versão Volta face a versões anteriores, mais precisamente a adição de \textit{tensor cores}, que são componentes especiais para acelerar as operações associadas a redes neuronais.
+ \begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.5\linewidth]{voltaSM}}
+  \caption{Esquema do SM para o GV100\cite{voltaArch}.}
+  \label{voltaSM}
+ \end{figure}
+\item \textbf{Caches e memória}: Existem dois níveis de cache a considerar. As caches L1 são usadas para melhorar a latência das operações globais de escrita e leitura e como especificado no ponto anterior, estas fazem parte dos SMs. Existe ainda uma cache partilhada L2 para complementar a presença das L1. A cache L2 é uma cache de escrita/leitura com uma politica de substituição \textit{write-back}. Esta cache responde a pedidos de instruções load, store assim como instruções atómicas de ambos SM e respetivas caches L1, preenchendo de forma igual as respetivas caches \cite{nickolls2010gpu}. A partir da arquitetura Volta a cache L1 e a memória partilhada de cada SM passam a estar juntas, o que traz beneficios para a L1 como o aumento da capacidade de memória/SM em 7 vezes a capacidade da arquitetura Pascal, a diminuição da latência de acesso e o aumento da banda-larga\cite{voltaArch}.  Também existirá uma nova cache de instruções L0 em cada um dos blocos do GV100, melhorando a eficiência face ao uso de buffers de instruções dos SMs anteriores. 
 \end{itemize}
-
-
   \begin{figure}[ht]
   \centering
-    {\includegraphics[width=0.5\linewidth]{fermiArch}}
-  \caption{Esquema da arquitetura do GPU. Neste caso a arquitetura corresponde ao Fermi GF100. \cite{wittenbrink2011fermi}}
-  \label{fig:fig2subfig}
+    {\includegraphics[width=1\linewidth]{archVolta}}
+  \caption{Esquema da arquitetura do GPU, mais precisamente do Volta GV100\cite{voltaArch}. Esta é a arquitetura mais recente que NVIDIA lançou no mercado.}
+  \label{voltaArch}
 \end{figure}
+\subsubsection{Capacidade de computação de uma arquitetura}
+Todas as arquiteturas NVIDIA têm o conceito de capacidade de computação rótulado a um valor (tabela \ref{tabelaCap}). Este valor determina as funcionalidades permitidas pelo hardware respetivo, assim como as melhorias nas componentes de hardware face a arquiteturas anteriores. O número de registos presentes no GPU, o número máximo de threads em cada SM e a granularidade de alocação dos registos variam com as diferentes capacidades de computação \cite{cudaProgGuide}. O valor da capacidade de computação pode ser usado pelas aplicações em tempo de execução para determinar o que o GPU presente na máquina dispõe em termos de funcionalidades e instruções nativas. Este valor é também décimal, sendo a casa das unidades respetiva ao número de revisão maior e o das décimas ao número de revisão menor. Se uma arquitetura tem um valor de capacidade de computação superior a uma segunda, por ser mais recente, quer dizer a primeira arquitetura tem as funcionalidades e caracteristicas de hardware da segunda, com mais umas adições novas, assim como a primeira consegue resolver os problemas endereçados na segunda. O que faz com que um programa que tenha sido implementado em referência a uma arquitetura Fermi ( capacidade computacional 2.0) possa ser compativel para execução num GPU com a arquitetura Volta ( capacidade computacional 7.0).
+\begin{table}[]
+\centering
 
-% Desenvolver o que é  um warp.
-Tendo em conta a quantidade de threads individuais que têm de ser geridas e executadas em diferentes programas de forma eficiente, é empregado pelos SMs uma arquitetura especifica para o efeito, denominada SIMT (\textit{Single-Instruction Multiple-Thread}). \cite{nvidiaTesla}
-Esta arquitetura permite a criação, gestão, escalonamento e execução de threads concurrentes em grupos de 32 cada. Estes grupos assumem o conceito de \textit{warps}, podendo cada bloco de threads do CUDA ter 1 ou mais warps.
-\cite{gpuComputingEra}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+GPU             & Kepler GK180 & Maxwell GM200 & Pascal GP100 & Volta GV100 \\ \hline
+Cap. Computação & 3.5          & 5.2           & 6.0          & 7.0         \\ \hline
+\end{tabular}
+\caption{Tabela de capacidades computacionais das arquiteturas NVIDIA mais recentes. Adaptado de \cite{voltaArch}.}
+\label{tabelaCap}
+\end{table}
+%Modelo de execução
+%eu trocava a ordem deste dois parágrafos
+%
+%primeiro dizes como é que computação é estrutura e depois como é que é executada
+%
+%Neste segundo ponto, tens de tornar claro que um bloco é executado por um SM e que um SM pode executar vários blocos (desde que tenha recursos hardware para tal). Depois disso podes entrar na discussão como é que os blocos são executados pelo SM. A tal divisão em warps
+\subsubsection{Modelo de execução}
+\label{exec}
+  %          papel do host e do device
+O modelo de execução em GPU inclui o conceito de computação heterógenea, em que temos dois conjuntos de dispositivos concorrentes a executar código: o conjunto \textit{host} composta por CPUs e o \textit{device}, composta por GPUs. Os dois sistemas são diferentes no papel desempenham. No caso do \textit{host}, este coordena as transferências de dados a manipular entre as duas entidades e a invocação dos \textit{kernels}.
+%kernel 
+Os \textit{kernels} são funções programadas para executar um determinado número de vezes $N$ em paralelo por $N$ threads do GPU, tendo cada uma destas threads um ID único, que é acessível dentro do kernel. O \textit{device} é responsável pela execução dos \textit{kernels} e manipulação dos dados que o \textit{host} alocou e transmitiu, retornando o resultado para o \textit{host}.
+%Threads\cite{cudaProgGuide}
+% Warps
+% A execução dos blocos em warps pelos SMs
+ As  \textit{threads} do GPU são consideradas como \textit{lightweight} pois são escalonadas em grupos conhecidos como \textit{warps}\cite{cudaProgGuide}\footnote[1] {Tendo em conta a quantidade de  \textit{threads} individuais que têm de ser geridas e executadas de forma eficiente, é empregado pelos SMs uma arquitetura especifica para o efeito, denominada SIMT (\textit{Single-Instruction Multiple-Thread}) \cite{nvidiaTesla}.
+É ainda permitido por parte de qualquer uma das arquiteturas referidas a criação, gestão, escalonamento e execução de  \textit{threads} concurrentes em grupos de 32 cada. Estes grupos denominam-se \textit{warps}, podendo cada bloco de  \textit{threads} do CUDA ter 1 ou mais warps
+\cite{nickolls2010gpu}.}. No caso do GPU ter de ficar à espera de um desses grupos, este tem a possibilidade de avançar para outro, pelo que não é necessário haver o sistema de trocas presente no CPU. As \textit{cores} do CPU minimizam a latência para um número muito reduzido de threads de cada vez, enquanto que as \textit{cores} do GPU permitem a este gerir um número muito maior de threads mais ligeiras, maximizando o \textit{throughput}.
+     %       a estruturação da computação em grelha, bloco     
+  \begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.5\linewidth]{threadGrid}}
+  \caption{Ilustração de uma grelha de threadblocks, detalhando um elemento da grelha para ilustrar os pormenores de um bloco de threads. Neste caso o bloco é bi-dimensional, mas existe a possiblidade de ser tri-dimensional, o mesmo se aplica à grelha \cite{cpg}.}
+  \label{threadGrid}
+\end{figure}
+     %Thread block
+Uma computação que é executada pelo GPU tem de ser estruturada numa grelha com até 3 dimensões. \par Cada um dos elementos da grelha é um bloco com a definição de \textit{thread block} ( na figura \ref{threadGrid} podemos consultar um exemplo de um \textit{thread block}). A dimensão máxima associada ao tamanho de um \textit{thread block} é 1024, pelo que cada  \textit{thread block} pode ter no máximo 1024 threads. Numa situação em que é pretendido fazer computações numa estrutura de dados de tamanho superior a 1024 unidades, a mesma é repartida em $N/1024$ bocados, sendo $N$ o tamanho da estrutura, e cada um desses bocados é atribuido a um \textit{thread block} para processamento. 
+ 
+\subsection{Modelos Base de Programação} 
+\label{progGPU}
+%  CUDA e OpenCL
+Em termos de programação em GPUs existem como APIs o CUDA (\textit{Compute Unified Device Architecture})\cite{cudaZone} que foi implementado pela NVIDIA e o OpenCL(\textit{Open computing language})\cite{openCL}. Ambos suportam a linguagem C/C++ apesar de poderem suportar outras linguagens, como por exemplo Free Pascal no caso do OpenCL. O CUDA apenas funciona com placas da NVIDIA enquanto que o OpenCL permite efectuar paralelizações em hardware de diferentes arquiteturas e tipos, desde CPUs a \textit{clusters}. Sobre o CUDA existem bindings para outras linguagens, como por exemplo pyCUDA para a linguagem Python ou a biblioteca do CUDA para acelerar a técnica FFT, cuFFT\cite{nvidiaFFT}. Quer para CUDA, quer para OpenCL, para além do que o programador necessita de programar em ambos host e device,  existem dois elementos a considerar: \textit{kernels} e \textit{thread blocks}. 
 
+%       o que é que o programador tem de expressar 
+%O que é que o programador deve elaborar para que o programa funcione -  não interessam o pormenores de sintaxe  
+Tendo em conta estes dois elementos, o programador deve elaborar código em duas vertentes. Por um lado tem de programar as tarefas do lado do host, mais precisamente alocações de memória no GPU, eventuais transferências de dados entre o CPU e o GPU que vão ser manipulados na execução dos \textit{kernels} e quando é que os estes são invocados. Sobre os \textit{kernels} o programador tem ainda de especificar os parametros de execução (dimensão do bloco e número de threads a invocar no kernel), sendo que com estes parametros o CUDA/OpenCL determina a quantidade de threads a lançar. Por outro tem de implementar o que é necessita de ser paralelizado de forma massiva pelo GPU, a correr dentro do \textit{kernel} em que pretende fazer a respetiva paralelização. O código sequêncial deve ser executado no \textit{host} e o código a paralelizar no programa deve ser executado no \textit{device}.
 
-Porém continuamos a necessitar do CPU para comunicar com o GPU, em que este último funciona como \textit{device} e o CPU funciona como \textit{host} numa interface de comunicação de dados entre os 2.
-%dizer o que é que é o host e o que é que é o device.
-Sendo assim é essencial usar o GPU como utensilio na paralelização de algoritmos que façam computações muito pesadas, como é o caso das etapas presentes nos algoritmos destacados nas secções anteriores.
-\subsection{Modelo de programação}
-\cite{optimization}
-\subsection{Modelo de execução}
-\cite{optimization}
+%thread blocks e sincronização
+%Sobre CUDA, é permitido pela API a sincronização de threads dentro de um thread block, no entanto a sincronização entre thread blocks através do uso da chamada referida não é possivel, já que estes são independentes entre si. No entanto, em versões mais recentes, tornou-se possivel a sincronização neste ultimo caso utlizando instruções e primitivas especificas suportadas pelo respetivo hardware CUDA. Uma alternativa para sincronizar blocos de threads é garantir que o kernel é terminado.
+
 
 \subsection{Optimizações}
-De acordo com \cite{optimization}, existem três aspetos a considerar quando pretendemos optimizar um programa recorrendo a um GPU:
+\label{optmi}
 
+%%%%%%
+Um dos passos na programação de versões aceleradas em GPU para um programa consiste em aplicar um conjunto de possiveis optimizações à versão paralelizada do programa, de forma a optimizar a performance do programa para que se possa comparar o resultado final com as expetativas iniciais.
+Existem quatros aspetos a considerar quando pretendemos optimizar um programa recorrendo ao GPU, com os respetivos detalhes de acordo com \cite{cudaProgGuide}:
 \begin{itemize}
-\item{\textbf{Floating Point throughput}} : É dependente da percentagem de instruções de floating point incidentes. A performance aqui é optimal quando os streaming processors (SPs) estão totalmente ocupados o que é notado em aplicações com muitas threads à disposição, não precisando de muitas sincronizações entre elas, não afectando a banda larga da memoria global. O speedup do kernel pode ser melhorado neste contexto reduzindo o número de instruções que não fazem contributos para computação dos dados.
+%        entre o host e o GPU - sobreposição dec computação com comunicação 
+%A stream in CUDA is a sequence of operations that execute on the device in the order in which they are issued by the host code. While operations within a stream are guaranteed to execute in the prescribed order, operations in different streams can be interleaved and, when possible, they can even run concurrently
+\item{\textbf{Sobreposição de comunicação com computação}} : 
+É necessário sobrepor as computações do host e do device com a comunicação pois ter as duas sem sobreposição pode afectar a performance.Tal pode ser feito através de \textit{streams}. \textit{Streams} são sequências de operações que são executadas no \textit{device}, por uma dada ordem imposta pelo \textit{host}  podendo ser cópias de memória ou execuções de \textit{kernels}. Apesar das operações numa \textit{stream} terem de ser executadas pela ordem imposta pelo host, as operações entre \textit{streams} podem ser interligadas, havendo sobreposição, e por consequência, possível a esconder a latência associada à transferência de dados entre o \textit{host} e o \textit{device}. Dependendo da arquitetura do device, é possivel sobrepor a comunicação entre host e \textit{device} e a computação respetiva à execução do \textit{kernels}. O requisito é ambas as instruções serem de \textit{streams} diferentes e não por defeito\footnote[2]{Uma \textit{stream} por defeito tem o seu \textit{streamID} com o valor nulo. Pelo que o pretendido é uma \textit{stream} cujo o seu id seja diferente de 0. }, caso contrário as instruções terão de ficar à espera de instruções anteriores no device terem acabado, sem poderem começar, o que  impossibilita a sobreposição das instruções e esconder a latência de comunicação.
 
-\item{\textbf{Latência de memória global}} : É possivel melhorar a latência da memória global em termos de acessos, criando um número de threads necessário para manter os SPs ocupados enquanto existem threads à espera de aceder à memória global. Este número depende da percentagem de acessos e outras instruções de grande latencia presente no programa. Quanto menor for esta percentagem, menos threads serão necessárias para atingir a ocupancia maxima dos SPs. Existe ainda outro factor que pode expor latencia de memória: O limite em registros e memória partilhada que os SMs dispõem podem impor uma limitação no número de threads que podem ser criados para esconder a latência.
+%      ocupação do GPU
+\item{\textbf{Taxa de ocupação do GPU}} :
+É essencial, para a performance ser optimal, manter os SMs do GPU o mais ocupados possivel no decorrer da execução da aplicação, devendo existir uma distribuição de trabalho equilibrada entre os SMs. A aplicação final deve estar implementada de forma a que use os threads e respetivos blocos maximizando a utilização do hardware, evitando situações em que se deixa de impor a distribuição livre de trabalho entre os SMs.
+A taxa de ocupação determina o quão efectivamente o GPU se encontra ocupado, isto é, o número de \textit{warps} que estão activos em relação ao número máximo de \textit{warps} que o GPU consegue activar. É pretendido que esteja o mais próximo possível de um certo limite que depende da capacidade de computação da arquitetura do GPU \footnote[3]{Como foi descrito no ponto \ref{gpuArch}, a respeito da capacidade de computação de uma arquitetura, o respetivo valor está associado ao número de registos presentes em cada SM, que pode variar dependendo do valor da capacidade.}. Exceder este limite não traz melhorias de performance, no entanto se o código estiver longe de atingir este limite é garantido que a performance não vai ser optimal. Para garantir a taxa de ocupação adequada ao GPU, é possivel optar por garantir que os \textit{kernels} são executados ao mesmo tempo, o que é chamado de execução concorrente de \textit{kernels}. 
 
-\item{\textbf{Bandwidth da memória global}} : Esta variável pode limitar o throughput do sistema e aumentar a quantidade de threads não resolve o problema. Igualmente se pode referir que diminuir a carga de pressão na bandwitdh da memória global implica recorrer a mais registos e memória partilhada dos SMs para reutilização de dados, o que limita o número de threads que podem correr em simultaneo. Pelo que é necessário um balanco entre as duas medidas referidas anteriormente.
+%        acesso a memória global e partilhada aqui tens de falar é dos acessos coalescentes à memória global e na utilização da memória partilhada
+%Global memory resides in device memory and device memory is accessed via 32-, 64-, or 128-byte memory transactions. These memory transactions must be naturally aligned: Only the 32-, 64-, or 128-byte segments of device memory that are aligned to their size (i.e., whose first address is a multiple of their size) can be read or written by memory transactions.
+%
+%When a warp executes an instruction that accesses global memory, it coalesces the memory accesses of the threads within the warp into one or more of these memory transactions depending on the size of the word accessed by each thread and the distribution of the memory addresses across the threads. In general, the more transactions are necessary, the more unused words are transferred in addition to the words accessed by the threads, reducing the instruction throughput accordingly.
+% How many transactions are necessary and how much throughput is ultimately affected varies with the compute capability of the device
+%Grouping of threads into warps is not only relevant to computation, but also to global memory accesses. The device coalesces global memory loads and stores issued by threads of a warp into as few transactions as possible to minimize DRAM bandwidth
+%Agrupar as threads em warps é relevante para os acessos à memória global. O device coalesce os loads e stores à memoria global na menor quantidade de transações possiveis para minimizar \cite{}
+%
+%Because it is on-chip, shared memory has much higher bandwidth and much lower latency than local or global memory.
+%
+%To achieve high bandwidth, shared memory is divided into equally-sized memory modules, called banks, which can be accessed simultaneously. Any memory read or write request made of n addresses that fall in n distinct memory banks can therefore be serviced simultaneously, yielding an overall bandwidth that is n times as high as the bandwidth of a single module.
+%
+%However, if two addresses of a memory request fall in the same memory bank, there is a bank conflict and the access has to be serialized. The hardware splits a memory request with bank conflicts into as many separate conflict-free requests as necessary, decreasing throughput by a factor equal to the number of separate memory requests. If the number of separate memory requests is n, the initial memory request is said to cause n-way bank conflicts.
+
+\item {\textbf{Optimizações de memória}} : Em que são consideradas as memórias global e partilhada do device.
+Sobre a memória global, esta é acessivel via transações de memória de 32, 64 ou 128 bytes. Estas transações devem estar naturalmente alinhadas, o que implica apenas os segmentos de memória cujo primeiro endereço é um multiplo do tamanho do segmento, sendo este 32, 64 ou 128 bytes poderem ser escritos ou lidos pelas transações.
+ Quando um warp executa uma instrução que pretende aceder à memória global, é feita a coalescência dos acessos à memoria por parte das threads do warp numa quantidade de transações de memória que depende do tamanho da palavra acedida por cada thread e da distribuição dos endereços de memória pelas threads do warp. Quanto maior é o número de transações ecessárias, maior é o número de palavras não usadas que são transferidos em adição às palavras acedidas pelas threads, o que tem como efeito a redução do \textit{throughput} de instruções\cite{cpg}. \par
+
+No caso da memória partilhada, esta tem uma latência de acessos menor do que a memória global, e largura de banda superior. A memória partilhada está dividia em módulos de memória com tamanho igual, chamados \textit{banks}. Os \textit{banks} podem ser acedidos de forma simultânea. Existe a possibilidade de ocorrer \textit{bank conflicts} quando dois endereços de um pedido de acesso à memória correspondem ao mesmo \textit{bank}.  Tendo o acesso de ser serializado e o pedido dividido em sub-pedidos separados que são livres de conflito. Por consequência o throughput é reduzido em um factor que depende do número de divisões efectuadas.
+
+%        evitar escolhas — divergência nos warps
+\item{\textbf{Controlo de fluxos}} : É muito importante evitar que ocorram divergências entre threads de um mesmo \textit{warp}. Esta situação pode acontecer quando dentro do código de um kernel existem instruções de controlo de fluxos (eg. if, switch,while, do while e for) o que leva à redução do throughput de instruções devido ao facto de existirem threads dentro de um \textit{warp} a divergir em caminhos de execução diferentes. No entanto podem existir situações em que o fluxo de controlo depende unicamente do thread ID, nessas situações é importante a escrita da condição de controlo de forma a atenuar o número de \textit{warps} a divergir. Outra forma de garantir que não existem divergências é tornar fácil para o compilador \footnote[4]{ No caso do CUDA o compilador é o NVCC, no caso do OpenCL é o OpenCL Compiler.} o uso de \textit{branch predication} ou seja, o compilador desenrola os loops/condições impedindo divergências de \textit{warps}. Apenas as instruções em que o predicado assume o valor verdadeiro em relação à condição de controlo são executadas.
 \end{itemize}
-
-\subsection{APIs para computação acelerada}
-\label {cuda}
-Em termos de programação em GPUs existe como API o CUDA (\textit{Compute Unified Device Architecture}) que foi implementado pela NVIDIA 
- 
- O CPU executa a parte sequêncial do programa enquanto que o GPU, com a sua quantidade numerosa de cores, executa a parte que requer computação mais intensiva como por exemplo multiplicação de matrizes (matmult), através de invocações especiais que se denominam\textit{ kernels}.\cite{nvidia2011nvidia}
-  
- De notar que é necessário fazer previamente as alocações respetivas de memória do host para o device, que são feitas por parte do CPU.
-   
- Um programador que queira utilizar CUDA para paralelizar o seu programa, deve transferir a toolkit respetiva ao sistema operativo em que pretende realizar o projeto, esta toolkit está disponivel na página da NVIDIA.
-   
-No entanto também existem mais APIs/frameworks para o efeito, como por OpenCL(\textit{Open computing language}) que é adequado para programação paralela em Free pascal enquanto que o CUDA é mais utilizado para C/C++ ou até mesmo Python (pyCUDA). 
-
-Ambos são semelhantes no sentido de implementar o protocolo de comunicações entre o CPU e o GPU, e de permitir invocar kernels para este último computar a parte intensiva.
+%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Docking em GPU}
 \label{gpus1}
-Já existem vários softwares e artigos dedicados à introdução de paralelizações ao FFT \cite{ritchiew} o que muitos têm em comum é o facto de utilizarem CUDA, neste caso utilizam CuFFT. 
+Face à complexidade do problema de docking e os softwares especificos terem execuções muito extensas, por apenas utilizarem cores do CPU, foi necessário desenvolver os softwares de docking existentes para versões que recorram ao GPU para efectuar as computações necessárias e obter tempos de execução menos extensos. Desta forma torna-se possivel o estudo das interações entre proteinas mais rápido e eficiente. \par
+Os exemplos em baixo apontados estão dividos pelo tipo de interação entre proteinas, podendo ser PPI ou PDI. 
+%Um aspeto comum entre todos é terem uma versão de software alternativo que funciona na web, ou seja, têm um web-server, que oferece os serviços que o programa original dispõe. A execução não é feita na máquina local mas sim numa repartição de clusters.
+%Já existem vários softwares e artigos dedicados à introdução de paralelizações ao FFT \cite{ritchiew} o que muitos têm em comum é o facto de utilizarem CUDA, neste caso utilizam CuFFT. 
 %Pending a correlação de matrizes é paralelizada no FFT?
-O CuFFT é uma versão própria do CUDA que fornece as implementações necessárias para que a perfomance do algoritmo seja aumentada em 10x, face às versões que utilizam o CPU para o processamento respetivo\cite{nvidiaFFT} . 
+%O CuFFT é uma versão própria do CUDA que fornece as implementações necessárias para que a perfomance do algoritmo seja aumentada em 10x, face às versões que utilizam o CPU para o processamento respetivo\cite{nvidiaFFT} . 
 
 \subsection {Megadock}
-Um exemplo desta espécie de softwares especificos para docagem é o Megadock 4.0, este software é de origem japonesa, que melhora em relação ao Megadock 1.0 no sentido de ter implementações no ambito da computação acelerada \cite{megadock}.
+\label{megaD}
+%Introcução megadock
+O Megadock é um software de protein-protein docking de origem japonesa, baseado em grelhas FFT. A versão 4.0\cite{megadock40} traz melhorias em relação ao Megadock 1.0 no sentido de ter implementações no âmbito da computação acelerada como é apontado em \cite{megadock}.
 
-Este programa é adequado para máquinas que têm muitos cores de GPU e CPU á disposição, caracteristicas tipicas de supercomputadores.
+Este programa é adequado para máquinas que têm muitos \textit{cores} de GPU e CPU à disposição, caracteristicas tipicas de supercomputadores.
+%detalhes implementação Sistema geral, clustering 
+O funcionamento do Megadock 4.0 envolve a criação de um processo master que faz a aquisição de uma lista de pares de proteinas e distribui o docking dos pares para os workers presentes nos nós disponiveis.
+ Estes, por sua vez, distribuem o trabalho de calcular a rotação do ligando em cada nó da lista, pelos diversos GPUs e CPUs do nó do cluster. A execução pelos GPUs de cada nó é feita por CUDA e pelos CPUs por OpenMP . 
+ %vantagens 
+ Uma das vantagens que este protocolo assume é a tolerância a falhas pois o nó master consegue supervisionar os resultados dos jobs executados pelos workers, além disso é escalável com o número de elementos que compõem o cluster.
 
-Foi implementado para GPU não só por CUDA como também por MPI (Message Passing Interface) e OpenMP. 
- O MPI, tal como a sigla expecifica, é uma API de interface de comunicação de mensagens entre processos a correr nos nós de um cluster\cite{mpiBook}. %detalhar isto, e o OpenMP
- O Megadock 4.0 é um enhancement em relação à versão 1.0 no sentido de suportar o modelo master-worker. 
-O funcionamento do Megadock 4.0 envolve a criação de um processo master que faz a aquisição de uma lista de pares de proteinas e cria jobs incidentes sobre a lista para os workers.
- Estes, por sua vez, distribuem o trabalho de calcular a rotação do ligando em cada nó da lista, pelos diversos GPUs e CPUs do nó do cluster. A distribuição pelos GPUs de cada nó é feita por CUDA e pelos CPUs por OpenMP \cite{megadock40}. 
- Uma das vantagens que este protocolo assume é a tolerancia de falhas pois o nó master consegue supervisionar os resultados dos jobs executados pelos workers, além disso é escalável com o número de elementos que compõem o cluster.
+   \begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.5\linewidth]{MegadockGPU}}
+  \caption{Etapas do processo de docking no Megadock. As etapas a cinzento foram aceleradas por GPU\cite{shimoda2015protein}. }
+  \label{megadockGPU}
+\end{figure}
+ \subsubsection{Optimizações para GPU}
+ %Referir o que é implementado para cuda no megadock e em que medida é importante para o BIGGER : O que é que os GPUs fazem
+As acelerações implementadas para o Megadock consistem em 6 \textit{kernels}. Na figura \ref{megadockGPU}) ilustram-se as etapas no processo de docking no Megadock, foi aplicado um profile sobre o funcionamento do programa com apenas 1  core do CPU, registando os tempos de execução em cada etapa. Os resultados presentes em \cite{shimoda2015protein} indicam que as etapas P4 a P8 consomem a maioria do tempo de execução. Estas etapas constituem um ciclo em que se iteram as possibilidades de ângulos para a rotação do ligando. No caso da P4 as coordenandas do ligando são atualizadas de acordo com uma dada matriz de rotação e o processo respetivo é independente para cada átomo, sendo paralelizável. Esta etapa foi acelerada mapeando as coordenadas atómicas do ligando para o GPU. 
+A segunda vertente da P4 consiste na voxelização do ligando, em que é feita uma afectação a uma posição da grelha em relação às coordenadas atómicas de um dado átomo do ligando. As coordenadas devem pertencer à região interna da curva de van der Waals. Este processo é também paralelizável em relação a cada átomo. Pelo que nesta vertente os átomos também são processados em paralelo e mapeados para o GPU, sendo cada átomo designado a uma \textit{core} do GPU.\par Para as etapas P5 e P7, em que existe a aplicação do FFT ao ligando e o cálculo da inversa do FFT, respetivamente, foi utilizada a biblioteca acelerada para FFT, cuFFT. Na etapa P6, convolução, foi aplicado um mapeamento para o GPU. E na última etapa do ciclo, P8, em que os resultados têm uma dada pontuação, foi aplicada uma operação de redução no GPU. 
+Em termos de comunicação host-device, é referido que apenas aconteceu uma vez a transferência de dados. O conteudo destes inclui as coordenadas atómicas do ligando e a grelha do receptor com o FFT aplicado. \par
+ %Resultados e tempos de execução
  Em termos de performance e tempos de execução, os testes efectuados em 2014 (tabela \ref{tab1}) pelos autores do programa revelam a sua rapidez. O Megadock foi capaz de determinar em minutos um caso de teste que o ZDOCK determinou em duas horas.
- Os resultados referidos foram obtidos por execução no supercomputador disponível no Instituto de Tecnologia de Tóquio, TSUBAME 2.0. A dimensão amostral consiste no número total de combinações de estruturas receptoras (1936) e no mesmo número para estruturas ligandas (14400). No caso do Megadock 4.0, o valor a considerar para o tempo de cálculo ronda as 5.71h para meio milhão de jobs e 11.51H para 1 milhão de jobs. Para este último teste foi utilizado a versão 2.3 do TSUBAME\cite{megadock40}. 
- 
- %Referir o que é implementado para cuda no megadock e em que medida é importante para o BIGGER
-  
+ Os resultados referidos foram obtidos por execução no supercomputador disponível no Instituto de Tecnologia de Tóquio, TSUBAME 2.0. A dimensão amostral consiste no número total de combinações de estruturas receptoras  e no número total de combinações para estruturas ligandas. No caso do Megadock 4.0, o valor a considerar para o tempo de cálculo ronda as 5.71h para meio milhão de jobs e 11.51H para 1 milhão de jobs. Para este último teste foi utilizado a versão 2.3 do TSUBAME\cite{megadock40}. 
 \begin{table}[]
 \centering
 \begin{tabular}{l|l|l|l|l|}
@@ -260,15 +363,84 @@ O funcionamento do Megadock 4.0 envolve a criação de um processo master que fa
                                              & Megadock 1.0 & Megadock 2.0 & Megadock 2.1 & ZDOCK 3.0 \\ \hline
 \multicolumn{1}{|l|}{Tempo de cálculo (min)} & 13.3         & 14.7         & 16.6         & 124.6     \\ \hline
 \end{tabular}
-\caption{Tempos de cálculo das versões iniciais do Megadock em relação ao ZDOCK \cite{megadock}. De notar que os testes foram realizados em 2014, pelo que actualmente em 2018, pelos mesmos motivos apontados }
+\caption{Tempos de cálculo das versões iniciais do Megadock em relação ao ZDOCK \cite{megadock}. }
 \label{tab1}
 \end{table}
+\subsubsection{Conclusões}
+Sobre esta implementação da parte do Megadock que utiliza o GPU, em CUDA, existem aspetos que podem ser aproveitados para ajudar na paralelização do BiGGER. Os mecanismos master-worker não são tão importantes pois o trabalho a desenvolver na elaboração da dissertação não engloba programação em clusters. As implementações dos kernels, no entanto, podem ser aproveitadas, mais precisamente a aplicação de uma operação de redução no passo do BiGGER que determina o ângulo de rotação optimal para o ligando. Também podem ser aproveitados os mapeamentos para o GPU descritos.
 
+%PIPER's primary advance is the use of desolvation energies in the evaluation function, in addition to the previously used shape and electrostatics terms. The desolvation terms are generated as pairwise potential terms. The PIPER algorithm proposed that by using eigenvalue-eigenvector decomposition, the number of terms needed could be limited to the P largest eigenvalues, where 2 ≤ P ≤ 4, limiting the added number of Fourier transforms to 2 to 4 forward transforms and one reverse. When GPU PIPER09 was designed, it was under the assumption that up to 18 of these desolvation terms may still be used [16]. Since then, however, it has been found that in practice only 4 terms are typically ever used; this is a key to one of the optimizations in the current work.
+
+%Most significant is the difference in proportion of time spend on the correlation step. On the GPU, the proportion is actually even smaller than shown: the correlation time is completely hidden by the data transfer time.
+%Algorithmic and usage changes in PIPER have changed the proportion of the time spent on filtering. It has been reduced in the CPU version but increased in the GPU version
+
+%Thus the goal of optimizing the GPU filtering kernel has changed from attempting to find the top score for all coefficient sets simultaneously, to quickly finding the top score for a single coefficient set and then repeating the process.
+%
+
+
+%GPU PIPER09 uses a scoring and filtering kernel that finds the top scores for a rotation for all provided scoring coefficients at the same time. This method works the best when the maximum number of coefficient sets are provided at the same time, typically up to 8. In this case, the top score for each set of coefficients is calculated by a single SM. With 8 coefficient sets, 8 SMs are simultaneously occupied. 
+%PIPER use has also changed. Most docking runs now use only a single coefficient set, meaning only a single SM is used. Thus the goal of optimizing the GPU filtering kernel has changed from attempting to find the top score for all coefficient sets simultaneously, to quickly finding the top score for a single coefficient set and then repeating the process.
+%%Filtering and scoring on the GPU now uses two kernels which are then repeated for every set of coefficients, as well as being repeated for the number of top scores desired by the user for each coefficient set. The two kernels partition the work into two stages so that the shared memory on the GPU is used for fast memory access, and so that work is distributed across all SMs.
+%In the first kernel the output data, which is the size of the molecular grid volume, or equivalently the FFT size, is partitioned among all available SMs. This is done by launching the kernel with a sufficiently large number of blocks such that every SM has a suitable quantity of work. For reasons that will be explained later, the number of blocks must be a power of two.
+
+%non-correlation steps: filtering, grid assignment, and data transfer
+%multiple sets of coefficients can be provided so that PIPER returns the top scores for each set of coefficients. PIPER is capable of returning the top N scores for each pose and coefficient set.
+
+%PIPER has initial stages that read in molecule information, compute the FFT size, create the receptor grids, compute the receptor FFT for all energy terms, and create the ligand grids. After this setup, PIPER performs the various rotations, and within each rotation, the following steps occur.
+%
+%Rotation of the ligand grid
+%Assignment of the 3D energy grids for all terms
+%FFT correlation of the receptor and the ligand grids
+%Accumulation of the desolvation terms to obtain pairwise potential score
+%Weighted score computation of different energy functions
+%Scoring and filtering for the current rotation
+ \subsection{PIPER}
+ À semelhança do Megadock, o PIPER é um programa de protein-protein docking baseado em grelhas FFT para calcular a complementaridade de superficie. O PIPER introduziu pela primeira vez o uso da energia de desolvação do par na função que avalia os complexos candidatos, complementando as funções de score respetivas à forma do complexo e a eletroestática. O fluxo de programação do PIPER (figura \ref{piperGPU}) consiste em duas fases: a fase \textit{setup} envolve a leitura dos dados relacionados com as moleculas, que são passados como input em ficheiro, a computação dos passos relacionados com o receptor, e criar as grelhas do ligando. Após o setup estar concluido são iteradas as possiveis rotações, em que as etapas referidas na figura são aplicadas para cada rotação. 
+ \subsubsection{Optimizações para GPU}
+ A implementação de acelerações ao PIPER\cite{piper2009gpu} por GPU ocorreu inicialmente em 2009, no entanto, em 2014 a performance da versão PIPER GPU de 2009 foi confrontada com a versão CPU de 2014. Esta versão introduziu optimizações no algoritmo original, mais precisamente foi alterada a bibilioteca que aplicava o FFT. Verificou-se que a versão CPU 2014 conseguiu ter performance superior às acelerações introduzidas em 2009, com execuções utilizando um GPU de 2014 \cite{piper2014gpu}. A proporção de tempo gasto no passo de correlação das matrizes é maior na versão CPU do que na GPU 2009 como se pode observar na figura \ref{propPiper}. No entanto, as proporções para a filtragem, acumulação e cálculo do score assim como a atribuição de grelha e rotações é maior na versão que usa GPU do que na versão CPU. Pelo que foi desenvolvida em 2014  uma solução com acelerações em GPU que aborda a paralelização dos passos de filtragem, atribuição de grelhas e transferência de dados entre o host e o device.
+ Sobre o passo de filtragem e cálculo do score, a versão de 2009 usava um kernel para a filtragem e atribuição de score para cada um dos conjuntos de coeficientes que podem ser adicionados à função que determina a energia do par, para uma rotação. O caso de uso optimal consistia em utilizar 8 desses conjuntos ao mesmo tempo, e utilizar 8 SMs para calcular o score optimal de cada um dos conjuntos\footnote[5]{A solução foi desenhada com o GPU Tesla C1060 em mente, esta arquitetura tem 30 SMs estando 8 ocupados com a execução do kernel o que garante uma performance melhor do que uma versão do PIPER que apenas utilize o CPU.}. Esta optimização deixou de ser válida pois em 2014 uma das optimizações na versão CPU2014 do PIPER foi reduzir o número total de conjuntos de coeficientes a ser processados para um, sendo apenas um SM do GPU utilizado, passando a ser pretendido encontrar o score optimal para o conjunto de coeficientes no menor tempo possível, de forma repetida. A versão GPU2014 introduziu nestes dois passos dois kernels em substituição de um na versão GPU2009, os dois kernels partem o trabalho total em duas fases de forma a que a memória partilhada do GPU possa ser utilizada para acessos rápidos de memória assim como o trabalho possa ser distribuido por todos os SMs.
+    \begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.75\linewidth]{piperFig}}
+  \caption{Etapas do processo de docking no PIPER. As etapas destacadas a verde escuro foram aceleradas por GPU em 2009 e a etapa a azul em 2014. \cite{piper2014gpu} }
+  \label{piperGPU}
+\end{figure}
+
+    \begin{figure}[ht]
+  \centering
+    {\includegraphics[width=0.75\linewidth]{cpuPoper}}
+  \caption{Proporções de tempo gasto na execução para a versão CPU optimizada e a versão de 2009 que usa GPUs\cite{piper2014gpu} . }
+  \label{propPiper}
+\end{figure}
+\subsubsection{Conclusões}
+Esta subsecção mostra que nem sempre uma versão de um programa com acelerações em GPU é superior a uma outra versão do mesmo programa que use o CPU com optimizações. Pelo que é necessário garantir ao longo do tempo que as optimizações são atualizadas com mecanismos que as arquiteturas correntess dispõem.
 \subsection {AutoDock}
-O AutoDock \cite{autoDock} consiste numa plataforma de software para auxilio na previsão da forma como pequenas moleculas, como é o caso das constituintes das drogas, se unem a receptores.
-Actualmente, existem duas versões do software: AutoDock 4 e Vina. O AutoDock 4 está divido ainda em dois sub programas: autodock faz o docking do ligando com um conjunto de grelhas que fazem a descrição do complexo resultante. O segundo, autogrid, faz os calculos previos para obter as grelhas que o autodock necessita para desempenhar as suas funções.  
-O AutoDock Vina é diferente do 4 no sentido de não efectuar o cálculo das grelhas de forma prévia mas sim instantaneamente. Entre as optimizações efectuadas encontra-se o uso de um método quasi-Newton BFGS
-\cite{autoDockVina}
+%introdução autodock
+O AutoDock \cite{autoDock} é um programa diferente dos até agora indicados, não só por ser especifico para interações entre proteina-droga\footnote[6]{Uma droga é caracterizada  por uma molécula de pequenas dimensões.} como também por utilizar o algoritmo genético de Lamarck para determinar a posição correta dos elementos do par, em alternativa ao uso da complementaridade de superficie como função de score. O caso é considerado pois foi desenvolvida uma aceleração do AutoDock usando o GPU\cite{autodockCuda}.
+Actualmente, existem duas versões do software: AutoDock 4 e Vina. O AutoDock 4 está divido ainda em dois sub programas: \textit{autodock} faz o docking do ligando com um conjunto de grelhas que fazem a descrição do complexo resultante. O segundo, \textit{autogrid}, faz os cálculos prévios para obter as grelhas que o autodock necessita para desempenhar as suas funções.  
+%Vantagens do Vina sobre o 4
+O AutoDock Vina \cite{autoDockVina} é diferente do AutoDock 4 no sentido de não efectuar o cálculo das grelhas de forma prévia mas sim instantaneamente, de forma automática, não guardando as grelhas em disco. Igualmente para o clustering dos resultados após o docking ter sido feito, que no Vina é feito sem mostrar ao utilizador detalhes desnecessários.
+Comparando com o AutoDock 4, em que o utilizador tem de introduzir um conjunto de parametros de input, para manipular o tamanho das estruturas de dados, que estão fixos em tempo de compilação e quanto maiores forem, mais espaço em memória podem ocupar assim como aumenta o tempo de computação do programa. O utilizador pode manipular estes valores ao seu critério no código fonte, tendo de recompilar o AutoDock 4, o que não é user-friendly. O Vina consegue ser superior neste aspeto adaptando-se ao input introduzido.
+
+%O que é foi utilizado para programar e termos de APIs
+O AutoDock Vina foi implementado segundo o paradigma de programação genérica assim como por programação orientada a objetos, na linguagem C++. 
+\subsubsection{Aceleração do AutoDock com o GPU}
+%Introduzir informação sobre a implementação para GPU do autodock e em que medida é que pode ser utilizado para o BIGGER
+ Em 2010 foi abordada, à semelhança do que foi feito para o Megadock, uma possivel paralelização do AutoDock utilizando o GPU. Neste caso a API utilizada foi o CUDA, sendo desenvolvida a versão 4.2.1 do AutoDock, que permite um speedup ao algoritmo genético que é utilizado, em 2 vezes, sendo este speedup semelhante ao do Vina sobre o AudoDock 4.  No entanto o Vina difere desta versão 4.2.1 no sentido de acelerar um algoritmo de pesquisa local que permite a redução das operações necessárias para chegar ao resultado final, enquanto que esta versão visa acelerar o algoritmo genético que o AutoDock utiliza para determinar a posição optimal do ligando encaixado com a proteina. Mais precisamente a função de fitness do algoritmo genético, que avalia a energia dos individuos da população constituida pelo algoritmo genético, sendo esta energia individual a soma da energia inter-molecular dos atomos do receptor e os do ligando.
+
+Os autores deste projeto de aceleração do AutoDock consideraram duas opções: a primeira seria dedicar cada thread do GPU ao cálculo da energia total de um individuo ao que eles designaram  \textit{PerThread} e a segunda dedicar um bloco de threads do GPU para determinar essa energia total (\textit{PerBlock}). A primeira solução garante a saturação do GPU (taxa de ocupação alta) para milhares de individuos e a segunda oferece a mesma saturação para centenas de individuos.
+A solução optada foi uma variante do \textit{PerBlock}, em que existem 5 kernels de escrita/leitura para cada passo do algoritmo genético (inicialização de coordenadas atómicas do individuo, aplicar a torção até ao cálculo da energia interna) para as coordenandas atómicas respetivas a um individuo. De forma a eliminar a possibilidade de existir overhead, foi optado lançar um kernel e guardar as coordenadas atómicas na memória partilhada. Por este factor, a solução foi renomeada para \textit{PerBlockCached}.
+ %o que é que o BIGGER ganha com isto?
+ \subsubsection{Conclusões}
+ Foi demonstrado na subsecção \ref{megaD} uma possibilidade de solução para acelerar o BiGGER, em que é implementado um conjunto de kernels para as diversas etapas, inclusive uma redução para determinar a solução optimal e mapeamentos de dados para o GPU. A solução para o AutoDock oferece uma forma de poder acelerar o cálculo da função de score do BiGGER utilizando a memória partilhada do GPU. % Acrescentar mais
+ 
+\subsection{Dinâmica Molecular em GPUs}
+% Introdução 41
+Para além das técnicas de docking descritas previamente, em que se recorre à complementaridade de superficie do par de proteinas, existe ainda a alternativa em usar a dinâmica molecular. Esta técnica é adequada para situações em que é pretendido analisar a termodinamica e energia cinética resultantes da ligação e separação do ligando com o receptor\cite{sledz2018protein}.
+%O que é dinamica molecular
+A dinamica molecular é um método de simulação de docking que considera 
+%O que ha para GPUs
+% Desta implementação pode-se adaptar, caso seja necessário, a implementação de um kernel para cada conjunto de etapas do BiGGER, desde a criação das grelhas até à atribuição dos valores binários core/surface, pode-se guardar as variáveis necessárias na memória partilhada do GPU. Esta adaptação poderá permitir reduzir a possibilidade de existir overhead na instanciação dos futuros kernels do BIGGER.% A possibilidade de adaptar uma versão do \textit{PerBlockCached}
 %% ====================
 %% = Folder Structure =
 %% ====================
