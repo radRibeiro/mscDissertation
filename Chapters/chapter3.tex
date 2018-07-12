@@ -36,7 +36,7 @@ Tendo em conta que no decorrer da elaboração não será desenvolvido código d
 Este ciclo de desenvolvimento será iterado o número de vezes necessário até a performance do BiGGER se enquadrar com os objetivos indicados no capitulo \ref{cap1}.
 \subsection {Profiling}
 \label{profiling}
-Antes de se considerar opções sobre as possibilidades para efectuar a optimização do BiGGER, foi necessário fazer uma averiguação sobre o custo de cada etapa do mesmo em termos de número de chamadas e tempo total de computação. O objetivo é poder determinar zonas de codigo a paralelizar, sendo esta tarefa o acto de fazer profiling a um programa. O profiling será feito aos ficheiros relacionados com o funcionamento do BiGGER, pois existem elementos do open-chemera que não são importantes para o mesmo, como por exemplo o chemera.lpi é o que é necessário compilar e executar no Lazarus para a parte gráfica do open-chemera, não influenciando a parte do BIGGER, que é independente.  No caso do Lazarus é possivel recorrer a duas formas principais para fazer profiling a um programa:
+Antes de se considerar opções sobre as possibilidades para efectuar a optimização do BiGGER, foi necessário fazer uma averiguação sobre o custo de cada etapa do mesmo em termos de número de chamadas e tempo total de computação. O objetivo é poder determinar zonas de codigo a paralelizar, sendo esta tarefa o acto de fazer profiling a um programa. O profiling será feito aos ficheiros relacionados com o funcionamento do BiGGER, pois existem elementos do open-chemera que não são importantes para o mesmo, como por exemplo o chemera.lpi é o que é necessário compilar e executar no Lazarus para a parte gráfica do open-chemera, não influenciando a parte do BIGGER, que é independente.  No caso do Lazarus é possivel recorrer a duas formas principais para fazer profiling a um programa\cite{lazProf}:
 \begin{itemize}
 \item gprof : Pode-se utilizar o gprof para fazer profiling em Lazarus, gerando um ficheiro de texto com os dados necessários para averiguar quais as funções do ficheiro bigger.lpi que podem representar oportunidades de paraleliação 
 \item LazProf: IDE de profiling para o lazarus, que funciona complementada com o FPProfiler 
@@ -82,6 +82,11 @@ Paralelizações adicionais poderão ser feitas na unit linegrids.pas que permit
 % section document_structure (end)
 \section{Plano de Trabalhos} % (fold)
 \label{sec:dealing_with_bibliogrpahy}
+%1 de Setembro a 30 Setembro: Familiarização com o código do BiGGER presente no Open-Chemera inclusive profiling caso nao tenha conseguido
+% 1ª Semana de Outubro (1 a 6)
+% 
+%No final de cada ciclo fazer no minimo duas páginas do documento de dissertação com as conclusões.
+%1 de Setembro a 30 Setembro: Familiarização com o código do BiGGER presente no Open-Chemera
 \textit{Gantt chart?}
 % section dealing_with_bibliogrpahy (end)
 

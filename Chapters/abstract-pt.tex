@@ -16,21 +16,21 @@
 %\begin{itemize}
 %% What's the problem?
 %	\item Qual é o problema?
-Na área cientifica da Bio-Informática, o estudo das interações entre as proteinas tem sido objeto de interesse. 
-No entanto conseguir determinar computacionalmente e com precisão como é que as mesmas se unem é dificil. 
-Existem, no entanto diversos métodos e algoritmos para prever o ajuntamento das proteinas. 
+Na área cientifica da Bio-Informática, determinar com precisão o complexo formado pela interação entre um par de proteinas é computacionalmente dificil. 
+Existem métodos e algoritmos para simular a fusão de um par de proteinas, que demoram horas para executar a simulação recorrendo apenas ao CPU, em 2018,  o que em termos de trabalho/tempo é ineficiente. 
 Um desses métodos é o BiGGER, criado pelo prof. Ludwig Krippahl, prof. Nuno Palma e outros integrados no projeto. 
 Este algoritmo assume caracteristicas que lhe dão uma complexidade temporal inferior aos demais, pelo que os tempos de execução do BiGGER são menores do que a maior parte dos algoritmos e respetivos programas de docking.
 %% Why is it interesting?
 %	\item Porque é que ele é interessante?
+O estudo das interações entre as proteinas tem aplicações na área da medicina, onde são desenvolvidas formas de proteger o Homem de doenças neuronais assim como desenvolve o desenho e concepção de drogas assistido por computador. 
+
 %Conseguir perceber como é que as proteinas interagem implica avanços na concepção e desenho de drogas assistido por computador 
 %% What's the solution?
-
+Para resolver a ineficiência referida, as ferramentas para docking foram optimizadas para usar o GPU como auxiliar na execução das simulações, reduzindo o tempo de execução de horas para minutos ou até mesmo segundos.
 O presente documento aborda uma proposição para a paralelização do algoritmo BiGGER.
 %	\item Qual é a solução?
  A implementação será feita recorrendo a técnicas de computação acelerada i.e. utilizar o GPU da máquina em que corre o algoritmo para auxiliar o CPU na computação que é necessária. 
- 
- Tendo mais recursos à disposição, é esperado que o tempo de execução do BiGGER baixe drasticamente por consequencia do aumento significativo de perfomance face à versão sequencial.
+ Tendo mais recursos à disposição, é esperado que o tempo de execução do BiGGER baixe drasticamente por consequência do aumento significativo de perfomance face à versão sequencial.
 %% What follows from the solution?
 Em caso de sucesso, a complexidade futura do algoritmo permitirá a adição de mais vantagens face aos seus concorrentes.
 % O que resulta (implicações) da solução?
