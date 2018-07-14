@@ -11,20 +11,19 @@
 %This Chapter aims at exemplifying how to do common stuff with \LaTeX. We also show some stuff which is not that common! ;)
 %
 % https://books.google.pt/books?id=q3DvBQAAQBAJ&pg=PA426&lpg=PA426&dq=APOD+cycle&source=bl&ots=KhoY0esEC7&sig=ecXbOBLk49T0mzgr36h1TJ9XF5I&hl=pt-PT&sa=X&ved=0ahUKEwi6g66pqIXcAhVB46QKHVcbBdkQ6AEIXzAL#v=onepage&q=APOD%20cycle&f=false
-\section{Ciclo de desenvolvimento}
-Tendo em conta que no decorrer da elaboração não será desenvolvido código de raiz, mas sim optimizar código existente, através de CUDA ou OpenCL, os esforços a adoptar durante a fase de elaboração seguirão um ciclo de desenvolvimento próprio para programação em GPUs, com quatro fases. Este ciclo denomina-se APOD (\textit{Assess}, \textit{Parallelize}, \textit{Optimize}, \textit{Deploy}) \cite{cudaProgGuide} e consiste em quatro fases(figura \ref{apodFig}):
+\section{Trabalho a desenvolver}
+\subsection{Ciclo de desenvolvimento}
+Tendo em conta que no decorrer da elaboração não será desenvolvido código de raiz, mas sim optimizar o código existente, através de CUDA ou OpenCL, os esforços a adoptar durante a fase de elaboração seguirão um ciclo de desenvolvimento próprio para programação em GPUs. Este ciclo denomina-se APOD (\textit{Assess}, \textit{Parallelize}, \textit{Optimize}, \textit{Deploy}) \cite{cudaProgGuide} e consiste em quatro fases (figura \ref{apodFig}):
 \begin{enumerate}
-\item {\textbf{\textit{Assess}}} : Onde é feito um \textit{assessment} ao estado atual do programa, em termos de performance. Nesta fase são determinados os pontos do programa onde este passa mais tempo a executar e identificar os bottlenecks de instruções, fazendo um profile da aplicação para confirmar as  identificações efectuadas. No caso da dissertação, é feito um profile do ficheiro bigger.lpi do open-chemera, como está descrito em \ref{profiling}. 
+\item {\textbf{\textit{Assess}}} : Onde é feito um \textit{assessment} ao estado atual do programa, em termos de performance. Nesta fase são determinados os pontos do programa onde este passa mais tempo a executar e identificar os bottlenecks de instruções, através de profilers para confirmar as identificações efectuadas. No caso da dissertação, é feito o profiling do ficheiro bigger.lpi presente na pasta bigger do Open-chemera e determinadas as funções que este ficheiro chama onde a fracção de tempo de execução é maior. 
 
 %Pelo que o esforço inicial para a esta etapa do ciclo já se encontra feito. Foram determinados dois pontos paralelizáveis com GPU, a detalhar em \ref{challenges}.
+\item{\textbf{\textit{ Parallelize}}} : Após o \textit{assessment}  referido anteriormente estar concluido, procede-se para a fase de implementação do código para paralelizar os pontos encontrados na fase anterior. De acordo com \textit{Six ways to SAXPY}, de Mark Harris \cite{saxpy}, existem três possibilidades para implementar acelerações: usar bibliotecas aceleradas, diretivas OpenACC ou recorrer a linguagens para programação em GPUs, como CUDA ou OpenCL. Na elaboração da dissertação é pretendido abordar a primeira e terceira possibilidades, no caso da terceira, existe a possibilidade de usar OpenCL pois é suportado pelo IDE Lazarus.
 
-\item{\textbf{\textit{ Parallelize}}} : Após o \textit{assessment}  referido anteriormente estar concluido, procede-se para a fase de implementação do código para paralelizar os pontos encontrados na fase anterior. De acordo com \cite{saxpy}, existem três possibilidades para implementar acelerações: usar bibliotecas aceleradas, diretivas OpenACC ou recorrer a linguagens para programação em GPUs, como CUDA ou OpenCL. Na elaboração da dissertação é pretendido abordar a primeira e terceira possibilidades, no caso da terceira, existe a possibilidade de usar OpenCL pois é suportado pelo IDE Lazarus.
+\item{\textbf{\textit{Optimize}}} : Nesta terceira fase é pretendido aumentar a performance da solução base, inicialmente esta ultima tem de ser determinada executando o programa com um dataset de tamanho adequado. E recorrer às técnicas descritas na subsecção \ref{optmi} para maximizar a performance. Também se podem considerar abstrações de outros programas relatados na subsecção \ref{gpus1}.
 
-\item{\textbf{\textit{Optimize}}} : Nesta terceira fase é pretendido aumentar a performance da solução base, inicialmente esta ultima tem de ser determinada executando o programa com um dataset de tamanho adequado. E recorrer às técnicas descritas em \ref{optmi} para maximizar a performance. Também se podem considerar abstrações de outros programas relatados em \ref{gpus1}.
-
-\item{\textbf{\textit{Deploy}}} : A última fase do ciclo consiste em confrontar a performance obtida com as expectativas fundamentadas no início do ciclo. Em caso de não corresponder ao speedup potencial registado na fase inicial, é necessário voltar à fase Assess, recomeçando o ciclo.
+\item{\textbf{\textit{Deploy}}} : A última fase do ciclo consiste em confrontar a performance obtida com as expectativas fundamentadas no início do ciclo. Em caso de não corresponder ao speedup potencial registado na fase inicial, é necessário voltar à fase \textit{Assess}, recomeçando o ciclo.
 \end{enumerate}
-
 
      \begin{figure}[ht]
   \centering
@@ -33,52 +32,197 @@ Tendo em conta que no decorrer da elaboração não será desenvolvido código d
   \label{apodFig}
 \end{figure}
 
-Este ciclo de desenvolvimento será iterado o número de vezes necessário até a performance do BiGGER se enquadrar com os objetivos indicados no capitulo \ref{cap1}.
 \subsection {Profiling}
 \label{profiling}
-Antes de se considerar opções sobre as possibilidades para efectuar a optimização do BiGGER, foi necessário fazer uma averiguação sobre o custo de cada etapa do mesmo em termos de número de chamadas e tempo total de computação. O objetivo é poder determinar zonas de codigo a paralelizar, sendo esta tarefa o acto de fazer profiling a um programa. O profiling será feito aos ficheiros relacionados com o funcionamento do BiGGER, pois existem elementos do open-chemera que não são importantes para o mesmo, como por exemplo o chemera.lpi é o que é necessário compilar e executar no Lazarus para a parte gráfica do open-chemera, não influenciando a parte do BIGGER, que é independente.  No caso do Lazarus é possivel recorrer a duas formas principais para fazer profiling a um programa\cite{lazProf}:
+%Mudar que não vai ser feito nesta fase o profiling, o programa não assume as condições para que se possa fazer o profiling, justificar que o código tem funções deprecated e houve mesmo erros de compilação. Pelo que a primeira coisa a fazer na elaboração é aplicar atualizar o código, mudando a chamada no ficheiro oclconfiguration.pas sobre de filutuils para LazFileUtils.
+De forma a confirmar as assumpções sobre as zonas de código a optimizar para execução no GPU, será necessário fazer uma averiguação sobre o custo de cada etapa do mesmo em termos de número de chamadas e tempo total de computação, através de um profiler. Na tentativa de fazer esta actividade, foi verificado que no código fonte existem chamadas para funções que estão \textit{deprecated} com uma versão actual do Free Pascal, tornado a compilação e o profiling com ferramentas actuais dificil. Neste contexto uma das primeiras tarefas a desempenhar será a actualização do código fonte seguido do profile à performance do BiGGER. O profiling será feito aos ficheiros relacionados com o funcionamento deste último, pois existem elementos do Open-chemera que não são importantes para o mesmo, como por exemplo o ficheiro \textit{chemera.lpi} é o que é necessário compilar e executar no Lazarus para a parte gráfica do Open-Chemera, não influenciando a parte do BiGGER, que é independente. Para executar a componente do BiGGER, é necessário passar como parametro um conjunto de ficheiros xml com a informação sobre os átomos das proteinas.  No caso do Lazarus é possivel recorrer a duas formas principais para fazer profiling a um programa \cite{lazProf}:
 \begin{itemize}
-\item gprof : Pode-se utilizar o gprof para fazer profiling em Lazarus, gerando um ficheiro de texto com os dados necessários para averiguar quais as funções do ficheiro bigger.lpi que podem representar oportunidades de paraleliação 
-\item LazProf: IDE de profiling para o lazarus, que funciona complementada com o FPProfiler 
+\item gprof : Pode-se utilizar o gprof para fazer profiling em Lazarus, gerando um ficheiro de texto com os dados necessários para averiguar quais as funções do ficheiro bigger.lpi que podem representar oportunidades de paraleliação. 
+\item LazProf: IDE de profiling para o Lazarus, que funciona complementada com o FPProfiler. 
 \end{itemize}  
 
- A abordagem LazProfiler requer uma instalação complexa mas é a alternativa cujo profiling mostra os resultados com qualidade superior, sendo necessário apenas ordenar na interface do programa a execução do programa. A alternativa é usar o gprof, que é suportado pelo compilador FreePascal pelo que não requer uma instalação com o nivel de complexidade da do LazProfiler, no entanto os resultados não assumem a mesma qualidade do LazProfiler.
+ A abordagem LazProfiler requer uma instalação complexa mas é a alternativa cujo profiling mostra os resultados com qualidade superior, sendo necessário apenas ordenar na interface do programa a execução do programa. A alternativa é usar o gprof, que é suportado pelo compilador FreePascal pelo que não requer uma instalação com o nível de complexidade da do LazProfiler, no entanto os resultados que são obtidos não assumem a mesma qualidade deste último.
+ 
+% Foi optado pelo uso do <alternativa> , apresentando-se os resultados na figura. Para a execução do profile foi abordado um cenário de teste representativo, usando um ficheiro .xml com informação dos átomos respetivos às proteinas.  Os resultados apontam que as zonas de código onde o programa passa mais tempo são:
+% %\ref{profileRes}
+% \begin{itemize}
+% \item{\textbf{Zona 1}}: .
+%  \item{\textbf{Zona 2}}: .
+%    \item{\textbf{Zona 3}}: .
+% \end{itemize}
+ 
+ %Concluir com uma aplicação da lei de gustafson barsis assim como com a lei de amdahl \cite{amdahl}
+% \textit{Pending Executar o profiling e apresentar resultados (1 Página com uma tabela)}
 \subsection{Possibilidades de optimização} % (fold)
 \label{abordagem}
-O programa que serve de interface gráfica ao BiGGER, que se pode fazer a clonagem do repositório em \textit{https://github.com/lkrippahl/Open-Chemera} encontra-se implementado em Free Pascal, 97.6\% do código total, ao acordo com o que foi abordado previamente, o trabalho a realizar na elaboração incide sobre o package \textbf{\textit{docking}} mais precisamente às unidades \textbf{bogie.pas} e \textbf{dockdomains.pas}. O bogie.pas consiste no módulo de docagem geométrica  e na unidade dockdomains são determinados os dominios nos três eixos para a simulação da docagem geométrica.
+A biblioteca \textit{open-source} para docking de proteinas usada no BiGGER, Open-Chemera, encontra-se implementada em Free Pascal (97.6\% do código total). O trabalho a realizar na elaboração é focado sobre o package \textit{docking}, mais precisamente às unidades \textit{bogie.pas} e \textit{dockdomains.pas}. O \textit{bogie.pas} consiste no módulo que trata a componente geométrica do docking e na unidade textbf{dockdomains.pas} são determinados os dominios nos três eixos para a simulação da docagem geométrica.
 
- O trabalho poderá abarcar a paralelização de mais unidades presentes no pacote o que só garante melhorias adicionais à performance do Open Chemera, por exemplo na secção \ref{challenges} é abordada uma paralelização à unidade linegrids.pas, que é a unidade onde é feito o cálculo das regiões de superficie e core dos pares assim como a determinação das grelhas para a superficie 3D dos mesmos, para o efeito de complementar a resolução do desafio distipulado na secção. As principais alterações serã, no entanto, focadas nos dois referidos anteriormente.
+ O trabalho poderá abarcar a paralelização de unidades adicionais presentes no pacote \textit{docking} o que só garante melhorias adicionais à performance da biblioteca Open-Chemera. 
+% por exemplo na secção \ref{challenges} é abordada uma paralelização à unidade linegrids.pas, que é a unidade onde é feito o cálculo das regiões de superficie e core dos pares assim como a determinação das grelhas para a superficie 3D dos mesmos, para o efeito de complementar a resolução do desafio distipulado na secção.
+% As principais alterações serão, no entanto, focadas nos dois referidos anteriormente.
  
-Face à possibilidade de não existir nenhuma versão do CUDA para programar paralelizações em Free Pascal. %Podemos, no entanto
+Face à possibilidade de não existir nenhuma versão do CUDA para programar paralelizações em Free Pascal, poderá ser optado por desenvolver as optimizações usando OpenCL, que é suportada pelo Lazarus. Este ultimo é o IDE a utilizar durante o trabalho de elaboração. É possivel, no entanto, implementar uma biblioteca acelerada (ficheiro dll) para o BiGGER com CUDA.
 
- Põe-se de lado esta última alternativa em troca de uma outra que recorra à framework OpenCL, que é suportada pelo Lazarus (IDE a utilizar durante a fase de elaboração do tema).
- 
-Poderão vir a ser implementados para a paralelização das duas unidades, kernels que executam operações de mapeamento, em que o espaço de possibilidades a tratar na primeira fase do BiGGER poderá ser associado a uma estrutura de dados(figura \ref{fig:fig3subfig}), dividida por blocos em que estes últimos serão constituidos por casas indexadas pelo ID da thread correspondente. Pelo que a indexação geral estará associada a uma fórmula que envolva a posição da thread no bloco e o número de bloco. Para cada uma das posições o core do GPU executará a função que determina se a configuração é aceite ou não.
-Este esquema de indexação de threads também existe em OpenCL, por invocações próprias na sua sintaxe.
-     \begin{figure}[ht]
-  \centering
-    {\includegraphics[width=0.5\linewidth]{Imagem1}}
-  \caption{Representação gráfica do ID geral de uma thread num array divido por blocos, em CUDA. Adaptações de \cite{Sainio2010CUDAEASYA} \cite{zeller2011cuda}}
-  \label{fig:fig3subfig}
-\end{figure}
-%continuar
+%Poderão vir a ser implementados para a paralelização das duas unidades, kernels que executam operações de mapeamento, em que o espaço de possibilidades a tratar na primeira fase do BiGGER poderá ser associado a uma estrutura de dados, dividida por blocos em que estes últimos serão constituidos por casas indexadas pelo ID da thread correspondente. Pelo que a indexação geral estará associada a uma fórmula que envolva a posição da thread no bloco e o número de bloco. Para cada uma das posições o core do GPU executará a função que determina se a configuração é aceite ou não.
+%Este esquema de indexação de threads também existe em OpenCL, por invocações próprias na sua sintaxe.
+%     \begin{figure}[ht]
+%  \centering
+%(figura \ref{fig:fig3subfig})
+%    {\includegraphics[width=0.5\linewidth]{Imagem1}}
+%  \caption{Representação gráfica do ID geral de uma thread num array divido por blocos, em CUDA. Adaptações de \cite{Sainio2010CUDAEASYA} \cite{zeller2011cuda}}
+%  \label{fig:fig3subfig}
+%\end{figure}
 
-\section {Desafios}
-\label{challenges}
-Os desafios incidem-se sobre dois pontos:
+%Confirmar com o profiling
+Os pontos de optimização focam-se nos seguintes:
 \begin{itemize}
 \item{\textbf{Criação das grelhas tri-dimensionais}} : 
-Tal como foi elaborado no capitulo anterior, o passo inicial do BiGGER consiste na criação de grelhas tri-dimensionais, de booleanos, que assumem valor 1 ou 0 se a posição respetiva na grelha corresponde a uma posição atómica da proteina. 
+%In this step, two new Boolean matrices are generated for
+%each docking partner. One—the surface matrix—containing
+%a definition of the molecular surface (a hollow shell
+%with the protein shape) and the other—the core matrix—
+%representing the positions belonging to the inner core of
+%the protein.
+%More precisely, the surface region is defined as the set of
+%volume matrix cells that are occupied by the protein shape
+%(i.e., have a value 1) and have at least one neighbor cell
+%that is empty (i.e., has a value of 0). Computationally, the
+%process of defining the molecular surface is very simple. A
+%copy of the volume matrix is shifted one location in each of
+%the 26 possible directions at a time, and an Exclusive Or
+%(XOR) logical operation is performed between the shifted
+%and the original matrices. Since the result of a XOR
+%operation is True only if both operands are different, this
+%will result in a double surface shell that can be trimmed
+%with an And operation with the original volume matrix
+%(Fig. 2). At this point, each protein is represented by two
+%3D matrices: the surface matrix and the core matrix. This
+%type of representation is very economical, since one unique
+%bit (0 or 1) is needed to define one surface location and one
+%byte may contain 8 surface locations at once. The matrices
+%are also encoded in a compact form, taking advantage o
+Tal como foi mencionado na subsecção \ref{biggerAlg}, um dos passos iniciais do BiGGER consiste na criação de duas grelhas tri-dimensionais de booleanos, para cada um dos elementos do par, que assumem valor 1 ou 0 se a posição respetiva na grelha corresponde a uma posição atómica da proteina. Neste contexto, é possivel determinar a região de superficie de cada proteina, sendo esta definida pelo conjunto de todos os nós da matriz que se encontram a 1. Na versão sequêncial do BiGGER, a região de superficie das proteinas é determinada fazendo um \textit{shift} da cópia da grelha uma casa para o lado em cada uma das 26 direções possiveis, aplicando uma operação lógica XOR entre os nós originais e os que foram deslocados. É possivel acelerar este procedimento implementando um kernel em que é mapeada a grelha original no GPU e distribuindo cada uma das direções pelos SMs.
 
-Analisando o código que se pode encontrar na unidade dockdomains.pas pode-se verificar que existem uma certa diversidade nas possibilidades de optimização.  
+%Analisando o código que se pode encontrar na unidade dockdomains.pas pode-se verificar que existem uma certa diversidade nas possibilidades de optimização.  
+%
+%O código presente nesta unidade contém um conjunto de \textit{procedures} que executam cadeias de ciclos for/while, em teoria é possivel paralelizar o dockdomains recorrendo a kernels que executam operações de map, de forma a reduzir a carga de computação.
+%
+%Paralelizações adicionais poderão ser feitas na unit linegrids.pas que permitem trazer melhorias extra de performance, no entanto serão alterações complementares, segundo a documentação inicial do código fonte da unidade, os segmentos gerados por esta unidade são referenciados apenas ao eixo z, sendo então uma unidade auxiliar para o BiGGER para a indexação da matriz tri-dimensional por parte deste.
 
-O código presente nesta unidade contém um conjunto de \textit{procedures} que executam cadeias de ciclos for/while, em teoria é possivel paralelizar o dockdomains recorrendo a kernels que executam operações de map, de forma a reduzir a carga de computação.
+%For every relative orientation of the two proteins, the
+%translational interaction space is searched by systematically
+%shifting the matrices defining one molecule (the
+%Probe) relative to the matrices representing the other
+%partner (the Target). This movement is performed in
+%discrete steps of the size of the matrix cells. The extent of
+%surface matching between the two molecules is thus
+%simply evaluated by the number of surface cells of the
+%target molecule overlapping any surface cells of the probe.
+%Computationally, this process is made very fast by applying
+%the AND Boolean operator to the memory registries
+%containing the two surface matrices. A value of 1 is
+%obtained for every position simultaneously occupied by the
+%surfaces of both proteins and 0 elsewhere. At the same
+%time, every solution that results in overlapping core cells of
+%both molecules is immediately discarded, thus rejecting
+%solutions involving unrealistic interpenetration of the
+%docking partners. However, core-surface overlaps are allowed
+%and this represents the second level of “softness” in
+%the algorithm.
+%Finally, the probe is rotated a certain amount (typically
+%15°) relative to the target and this process (digitization,
+%translation, surface matching) is repeated until a complete
+%non-redundant search in the 6-dimensional space is performed
 
-Paralelizações adicionais poderão ser feitas na unit linegrids.pas que permitem trazer melhorias extra de performance, no entanto serão alterações complementares, segundo a documentação inicial do código fonte da unidade, os segmentos gerados por esta unidade são referenciados apenas ao eixo z, sendo então uma unidade auxiliar para o BiGGER para a indexação da matriz tri-dimensional por parte deste.
+\item{\textbf{Pesquisa de sobreposições}} : De forma a poder avaliar a correspondência entre as superficies dos pares, para cada rotação a ser tratada é aplicada uma operação de shift, à semelhança do passo anterior, mas desta vez com as matrizes originais de ambos os elementos do par. A determinação de sobreposições é feita determinando o número de sobreposições entre os nós de superficie de ambas as proteinas. Na versão sequêncial, para determinar as sobreposições é necessário aplicar uma operação lógica AND entre os registos de memória que contêm as matrizes de superficie. Por sua vez situações em que existam sobreposições entre nós \textit{core} são descartadas como candidatos, no entanto situações em que são sobrepostos um nó \textit{core} com um nó de superficie não são. É feita uma rotação entre os pares de proteinas em um ângulo de 15º por omissão, repetindo os processos de criação das grelhas, translação por shift e correspondência de superficie até todas as possibilidades num espaço de 6 dimensões estarem cobertas. Este procedimento assume as mesmas condições do que a etapa do Megadock correspondente à rotação do ligando, neste o processo para cada átomo (representado como um nó da grelha do ligando) é independente, sendo mapeado para o GPU. Neste contexto é possivel abordar uma optimização em que os nós da grelha são mapeados para o GPU. Cada um dos nós serão processados por um core do GPU e o AND passa a ser aplicado entre registos do GPU em vez de ser em registos do CPU.
+%During the search procedure, up to 109 different modes
+%of contact between two proteins may be assessed (depending
+%on the molecular size). It is absolutely necessary to
+%drastically reduce this number of putative solutions before
+%they can be evaluated according to any energy terms. A
+%sub-population of 1,000 binding modes is actually kept,
+%which represents a reduction of more than 99.999% of the
+%total solutions sampled.
+%During this work, two levels of filtering were tested to
+%discard unlikely solutions. The simplest one uses the
+%unique criterion of geometric complementarity. After each
+%evaluation of surface matching, its value is compared with
+%a sorted lookup table containing those of the 1,000 best
+%matching solutions found so far. If its surface matching is
+%poorer than that of the worst solution in the table, then it
+%is discarded. Otherwise, it is saved and the geometry of the
+%worst element in the table is eliminated.
+%As discussed above, pure geometric surface complementarity
+%may not be sufficient as the sole criterion to safely
+%eliminate unlike binding modes. Within our test cases, we
+%found many situations where the native-like complex has a
+%poor intermolecular surface contact compared to many
+%alternative incorrect solutions. This can cause the nativelike
+%solution to be pushed down the table of top scores and
+%eventually, in some cases, to be excluded from the table of
+%retained solutions.
+%Therefore, a more complete and combined criterion is
+%used, where indicated, to filter out unlike docked geometries.
+%In this procedure, the list of retained solutions is
+%still sorted by surface matching score and every solution
+%with a lower index of surface matching, than the last
+%element in the list, is immediately discarded, as above.
+%However, the remaining complexes are not automatically
+%kept. They are checked for pairwise amino acid contacts
+%across the molecular surface (see Side Chains Interactions
+%below) and only those possessing favorable net amino acid
+%interactions are then inserted in the list of saved solutions
+%and the last element is discarded.
+%Since this operation is performed for the very small
+%percentage of eligible docked geometries with higher surface
+%matching scores, it does not significantly slow the
+%search and filtering process.
 
-\item{\textbf{Pesquisa de sobreposições}} : 
+\item{\textbf{Filtragem de Candidatos}}: O BiGGER contem um passo de filtragem de candidatos, em que $10^{9}$ possiveis contactos entre as proteinas são filtrados, sendo eliminados no final deste processo $99.999\%$ destes. O processo consiste em usar uma combinação de critérios, sendo esta combinação composta inicialmente por complementaridade de superficie, seguida pelo número de contactos favoráveis entre pares de amino-ácidos. A avaliação é determinada para cada candidato e esta é comparada com as avaliações presentes numa tabela com as 1000 melhores encontradas até ao momento. Se a avaliação mostrar que a solução é pior do que a do último elemento da tabela, a solução é descartada. Em caso de ser melhor, a solução é guardada na tabela e o último elemento da lista é descartado. Uma optimização a considerar para este passo será distribuir a computação relacionada com as avaliações da complementaridade de superficie e número de contactos em dois kernels. A tabela com os melhores candidatos poderá ser guardada em memória partilhada no GPU, pois é nesta memória que os acessos são mais rápidos do que na memória global. De notar que nesta fase são feitos muitos acessos à tabela para alterar o conteúdo desta, pelo que é importante que estes sejam rápidos.
+%At this stage, the four individual interaction terms
+%evaluated for each docking solution (either individual or
+%cluster) must be properly combined into a global scoring
+%function. This will be the criterion used to rank docking
+%results and to distinguish the near-native solutions—
+%which resembles the experimentally determined structure
+%of the complex—from the majority of other incorrect
+%solutions.
+%None of the interaction terms is sufficient per se to be
+%used as a judging criterion. Besides, the theoretical backgrounds
+%behind each of the interaction terms are quite
+%disparate and they are expressed in different units and
+%scales, so they cannot be directly compared. However, the
+%main assumption behind the scoring function herein described
+%is that a proper combination of the four independently
+%calculated interaction terms should include, in one
+%way or another, most of the relevant details determining
+%the molecular recognition and specificity of non-covalent
+%protein complexes.
+%The scoring function is empirically defined through a
+%learning process using neural network technology and
+%aiming at predicting the known crystallographic structures
+%of a series of protein complexes.
+%The classification system used is a feed forward neural
+%network with three hidden layers (with 4, 3, and 2
+%neurons, respectively) and a single output neuron. The
+%input values for the network are the four interaction terms
+%calculated for each solution (or cluster of solutions) and its
+%output is a single scoring value, which is an estimate of the
+%likelihood of that solution representing a near-correct
+%binding mode. In the process of training and testing, each
+%docked geometry was labeled as a near-correct solution if
+%its RMS deviation (a-carbons) from the crystallographic
+%complex was less than 4.0 Å. Otherwise it was labeled as
+%incorrect.
+%The training phase used a neural network back propagation
+%algorithm30 and was targeted at maximizing the
+%distinction between near-correct and incorrect structures
+\item{\textbf{Scoring}}: Na fase de scoring do BiGGER, são considerados quatro termos individuais na avaliação de cada solução encontrada: complementaridade de superficie, contactos entre ámino-acidos, electroestática e solvatação. Estes quatro termos são combinados numa função de scoring global, sendo esta última calculada para cada um dos candidatos, à semelhança do que é feito para o PIPER sobre os seus conjuntos de quoficientes na função de score. Poderá ser necessário aplicar uma optimização em que os procedimentos associados quatros termos são distribuidos por 4 SMs, pelo que esta optimização poderá ser semelhante à correspondente ao uso do segundo kernel no conjunto de optimizações para o PIPER em 2014.
 \end{itemize}
-\textit{Pending Executar o profiling e apresentar resultados (1 Página com uma tabela)}
+\section{Metodologia de Avaliação}
+% o que vais avaliar e como? ou seja quais serão as métricas de sucesso? aqui é fácil será a redução do tempo de execução, mantendo a correção dos resultados
+No final de cada iteração do ciclo, serão feitas análises de performance ao BiGGER, onde serão avaliadas ambas redução de tempo de execução e exactidão dos resultados face à versão actual do programa.
+A exactidão poderá ser feita submetendo a versão optimizada do BiGGER aos testes aplicados à versão sequêncial, procurando coincidencias nos resultados. Por sua vez a redução do tempo de execução poderá ser avaliada comparando os valores de speedup da solução desenvolvida em cada ciclo com o speedup máximo teórico. Segundo o guia de boas práticas da NVIDIA \cite{cudaProgGuide},  os conceitos de escalabilidade forte e fraca são necessários para determinar o quanto um programa pode ser paralelizado. No entanto usar um ou outro depende das caracteristicas do problema que o programa resolve. É recomendado considerar a escalabilidade forte quando o tamanho do problema é constante e o tempo de solução decresce à medida que o número de processadores aumenta. Em alternativa a escalabilidade fraca é considerada quando o tamanho do problema varia à medida que o número de processadores aumenta. No caso do BiGGER e da modelação das interações entre moléculas, o tamanho destas pode variar com a complexidade da molécula, mas o tamanho é constante no decorrer da execução do programa. Da mesma forma o tamanho das grelhas criadas inicialmente não é variável assim como o número de direções para onde a operação de shift entre as grelhas, pelo que é aplicável a escalabilidade forte a este problema. Neste contexto o speedup máximo teórico pode ser determinado após a fase \textit{Assess} em cada ciclo estar concluida, recorrendo à lei de Amdahl \cite{amdahl1967}, em que o speedup máximo teórico é dado pela fórmula $ S = 1 / ( 1 - P )$, sendo S o speedup máximo teórico que o programa pode alcançar e P a fração sequêncial do código que pode ser paralelizado. O speedup corrente, por sua vez, pode ser determinado através da formula $ S = t1/ tp$, sendo t1 o tempo de execução da versão do BiGGER que usa apenas o CPU e tp o mesmo tempo para a versão que usa ambos CPU e GPU.
 % section document_structure (end)
 \section{Plano de Trabalhos} % (fold)
 \label{sec:dealing_with_bibliogrpahy}
@@ -87,7 +231,7 @@ Paralelizações adicionais poderão ser feitas na unit linegrids.pas que permit
 % 
 %No final de cada ciclo fazer no minimo duas páginas do documento de dissertação com as conclusões.
 %1 de Setembro a 30 Setembro: Familiarização com o código do BiGGER presente no Open-Chemera
-\textit{Gantt chart?}
+%\textit{Gantt chart?}
 % section dealing_with_bibliogrpahy (end)
 
 
