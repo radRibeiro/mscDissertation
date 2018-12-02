@@ -35,7 +35,7 @@
 
 % The default option marked with (*)
 \documentclass[
-  docdegree=mscplan,        % phd(*), phdplan, phdprop, msc, mscplan, bsc
+  docdegree=msc,        % phd(*), phdplan, phdprop, msc, mscplan, bsc
   school=nova/fct,      % nova/fct(*), nova/fcsh, nova/ims, ul/ist, ul/fc
   lang=pt,              % en(*), fr, it, pt
   coverlang=pt,         % defaults to main language
@@ -110,7 +110,8 @@
 %% VERY IMPORTANT
 \usepackage{booktabs}    % Beautiful simple tables
 \usepackage{paralist}    % To enable customizble enumerates
-
+\usepackage{algpseudocode}
+\usepackage[]{algorithm2e}
 %% IMPORTANT (consider removing/commenting)
 %\usepackage{colortbl}    % Use colors in background of table cells
 \usepackage[textsize=footnotesize]{todonotes}  % To register TODO notes in the text
@@ -178,14 +179,14 @@
 \authordegree{Licenciado em Engenharia Informática}
 
 % Date
-\datemonth{July}
-\dateyear{2018}
+\datemonth{Março}
+\dateyear{2019}
 
 
 % Advisers
 % use "\\&" if necessary to break the lines in the apprpriate place
 % use [f] for female and [m] for male
-\adviser[m]{Ludwig Krippahl}{Professor Associado}{\\& FCT-UNL} 
+\adviser[m]{Ludwig Krippahl}{Professor Auxiliar}{\\& FCT-UNL} 
 % you may use "\newline" to force a new line
 % \adviser[m]{John Doe Male Adviser Name}{Associate\\& Professor}{Some University Somewhere}
 % \adviser[m]{John Doe Third Adviser Name}{Associate\\& Professor}{Some University Somewhere}
@@ -193,7 +194,7 @@
 
 % Co-Advisers (maximum of 9)
 % use [f] for female and [m] for male
-\coadviser[m]{Hervé Paulino}{Professor Associado}{\\&FCT-UNL}
+\coadviser[m]{Hervé Paulino}{Professor Auxiliar}{\\&FCT-UNL}
 % \coadviser[f]{[Nome da co-orientadora 2]}{[Profª.\ Auxiliar]}{[Universidade Nova de Lisboa]}
 
 

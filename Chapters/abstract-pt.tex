@@ -16,25 +16,25 @@
 %\begin{itemize}
 %% What's the problem?
 %	\item Qual é o problema?
-Na área cientifica da Bio-Informática, determinar com precisão o complexo formado pela interação entre um par de proteinas é computacionalmente dificil. 
-Existem métodos e algoritmos para simular a fusão de um par de proteinas, que demoram horas para executar a simulação recorrendo apenas ao CPU, em 2018,  o que em termos de trabalho/tempo é ineficiente. 
-Um desses métodos é o BiGGER, criado pelo prof. Ludwig Krippahl, prof. Nuno Palma e outros integrados no projeto. 
-Este algoritmo assume caracteristicas que lhe dão uma complexidade temporal inferior aos demais, pelo que os tempos de execução do BiGGER são menores do que a maior parte dos algoritmos e respetivos programas de docking.
+Na área científica da Bioinformática, determinar com precisão o complexo formado pela interação entre um par de proteínas é computacionalmente difícil. 
+Existem métodos e algoritmos para simular a fusão de um par de proteínas, que demoram horas para executar a simulação recorrendo apenas à CPU, sendo em termos de trabalho/tempo ineficiente. 
+Um desses métodos é o BiGGER, desenvolvido pelo prof. Nuno Palma et al. 
+Este algoritmo assume características que lhe dão uma complexidade temporal inferior aos demais, pelo que os tempos de execução do BiGGER são menores do que a maior parte dos algoritmos e respetivos programas de docking.
 %% Why is it interesting?
 %	\item Porque é que ele é interessante?
-O estudo das interações entre as proteinas tem aplicações na área da medicina, onde são desenvolvidas formas de proteger o Homem de doenças neuronais assim como desenvolve o desenho e concepção de drogas assistido por computador. 
+O estudo das interações entre as proteínas tem aplicações medicinais, onde são desenvolvidas formas de proteger o Homem de doenças neuronais assim como traz desenvolvimentos na área do desenho e concepção de drogas assistido por computador. 
 
-%Conseguir perceber como é que as proteinas interagem implica avanços na concepção e desenho de drogas assistido por computador 
+%Conseguir perceber como é que as proteínas interagem implica avanços na concepção e desenho de drogas assistido por computador 
 %% What's the solution?
-Para resolver a ineficiência referida, as ferramentas para docking foram optimizadas para usar o GPU como auxiliar na execução das simulações, reduzindo o tempo de execução de horas para minutos ou até mesmo segundos.
+Para resolver a ineficiência referida, as ferramentas para docking foram optimizadas para usar a GPU como auxiliar na execução das simulações, reduzindo o tempo de execução de horas para minutos ou até mesmo segundos.
 O presente documento aborda uma proposição para a paralelização do algoritmo BiGGER.
 %	\item Qual é a solução?
- A implementação será feita recorrendo a técnicas de computação acelerada i.e. utilizar o GPU da máquina em que corre o algoritmo para auxiliar o CPU na computação que é necessária. 
- Tendo mais recursos à disposição, é esperado que o tempo de execução do BiGGER baixe drasticamente por consequência do aumento significativo de perfomance face à versão sequêncial.
+ A implementação será feita recorrendo a técnicas de computação acelerada i.e. utilizar a GPU da máquina em que corre o algoritmo para auxiliar a CPU na computação que é necessária. 
+ Tendo mais recursos à disposição, é esperado que o tempo de execução do BiGGER baixe drasticamente por consequência do aumento significativo de performance face à versão sequencial.
 %% What follows from the solution?
 Em caso de sucesso, a complexidade futura do algoritmo permitirá a adição de mais vantagens face aos seus concorrentes.
 % O que resulta (implicações) da solução?
-Por consequencia deste aumento de performance, uma proposta de valor para quem pretenda utilizar o open-chemera será ter uma ferramenta de trabalho eficiente no estudo das interações entre as proteinas em qualquer máquina que tenha uma placa gráfica com as caracteristicas adequadas.
+Por consequência deste aumento de performance, uma proposta de valor para quem pretenda utilizar o BiGGER será ter uma ferramenta de trabalho eficiente no estudo das interações entre as proteínas em qualquer máquina que tenha uma placa gráfica com as características adequadas.
 %\end{itemize}
 %
 %E agora vamos fazer um teste com uma quebra de linha no hífen a ver se a \LaTeX\ duplica o hífen na linha seguinte…
@@ -46,6 +46,6 @@ Por consequencia deste aumento de performance, uma proposta de valor para quem p
 
 % Palavras-chave do resumo em Português
 \begin{keywords}
-proteinas, docking, computação acelerada,GPU, Bio-Informática, BiGGER
+proteínas, docking, computação acelerada,GPU, Bioinformática, BiGGER
 \end{keywords}
 % to add an extra black line

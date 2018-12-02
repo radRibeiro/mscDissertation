@@ -5,20 +5,60 @@
 %%
 %% Abstract in English
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The dissertation must contain two versions of the abstract, one in the same language as the main text, another in a different language.  The package assumes that the two languages under consideration are always Portuguese and English.
-
-The package will sort the abstracts in the appropriate order. This means that the first abstract will be in the same language as the main text, followed by the abstract in the other language, and then followed by the main text. For example, if the dissertation is written in Portuguese, first will come the summary in Portuguese and then in English, followed by the main text in Portuguese. If the dissertation is written in English, first will come the summary in English and then in Portuguese, followed by the main text in English.
-
-The abstract shoul not exceed one page and should answer the following questions:
-
-\begin{itemize}
-	\item What's the problem?
-	\item Why is it interesting?
-	\item What's the solution?
-	\item What follows from the solution?
-\end{itemize}
-
+%The dissertation must contain two versions of the abstract, one in the same language as the main text, another in a different language.  The package assumes that the two languages under consideration are always Portuguese and English.
+%
+%The package will sort the abstracts in the appropriate order. This means that the first abstract will be in the same language as the main text, followed by the abstract in the other language, and then followed by the main text. For example, if the dissertation is written in Portuguese, first will come the summary in Portuguese and then in English, followed by the main text in Portuguese. If the dissertation is written in English, first will come the summary in English and then in Portuguese, followed by the main text in English.
+%
+%The abstract shoul not exceed one page and should answer the following questions:
+%
+%\begin{itemize}
+%	\item What's the problem?
+%	\item Why is it interesting?
+%	\item What's the solution?
+%	\item What follows from the solution?
+%\end{itemize}
 % Palavras-chave do resumo em Inglês
+%
+%Na área cientifica da Bio-Informática, determinar com precisão o complexo formado pela interação entre um par de proteinas é computacionalmente dificil. 
+%Existem métodos e algoritmos para simular a fusão de um par de proteinas, que demoram horas para executar a simulação recorrendo apenas ao CPU, em 2018,  o que em termos de trabalho/tempo é ineficiente. 
+%Um desses métodos é o BiGGER, criado pelo prof. Ludwig Krippahl, prof. Nuno Palma e outros integrados no projeto. 
+%Este algoritmo assume caracteristicas que lhe dão uma complexidade temporal inferior aos demais, pelo que os tempos de execução do BiGGER são menores do que a maior parte dos algoritmos e respetivos programas de docking.
+%%% Why is it interesting?
+%%	\item Porque é que ele é interessante?
+%O estudo das interações entre as proteinas tem aplicações na área da medicina, onde são desenvolvidas formas de proteger o Homem de doenças neuronais assim como desenvolve o desenho e concepção de drogas assistido por computador. 
+%
+%%Conseguir perceber como é que as proteinas interagem implica avanços na concepção e desenho de drogas assistido por computador 
+%%% What's the solution?
+%Para resolver a ineficiência referida, as ferramentas para docking foram optimizadas para usar o GPU como auxiliar na execução das simulações, reduzindo o tempo de execução de horas para minutos ou até mesmo segundos.
+%O presente documento aborda uma proposição para a paralelização do algoritmo BiGGER.
+%%	\item Qual é a solução?
+% A implementação será feita recorrendo a técnicas de computação acelerada i.e. utilizar o GPU da máquina em que corre o algoritmo para auxiliar o CPU na computação que é necessária. 
+% Tendo mais recursos à disposição, é esperado que o tempo de execução do BiGGER baixe drasticamente por consequência do aumento significativo de perfomance face à versão sequêncial.
+%%% What follows from the solution?
+%Em caso de sucesso, a complexidade futura do algoritmo permitirá a adição de mais vantagens face aos seus concorrentes.
+%% O que resulta (implicações) da solução?
+%Por consequencia deste aumento de performance, uma proposta de valor para quem pretenda utilizar o open-chemera será ter uma ferramenta de trabalho eficiente no estudo das interações entre as proteinas em qualquer máquina que tenha uma placa gráfica com as caracteristicas adequadas.
+In Bioinformatics, finding the complex resulting from an interaction between two pairs of proteins is computationally demanding.
+There are methods and algorithms to simulate the binding between two proteins, however, the computation related to docking has many extensive and repeating steps. Thus, the execution of the simulation if the program is only using the CPU can last for hours, which is very inefficient. 
+One of the methods used is BiGGER, created by prof. Nuno Palma and others.
+This algorithm has features that give it a lower time complexity compared to others, therefore execution times in BiGGER can be lower than most of the algorithms for docking purpose.
+Studying protein interactions has medical aplications, contributing to the development of ways to protect, diagnose and heal mankind from neuronal diseases. It also contributes to computer assisted drug design and development.
+To improve the execution time of docking programs, these were optimized for GPU execution, reducing the execution time from hours to minutes or even seconds.
+This document presents an aproach to the implementation of optimizations to BiGGER, running it with GPU. This implementation is to be done via high performance computing techniques, so that the machine's GPU assists the CPU on parallelizing those required computations. By having more resources at disposal, it should be expected that the execution time of BiGGER is reduced due to the improvement of BiGGER performance in relation to the sequential version.
+If the implementations succeed, there will be additional advantages for BiGGER in relation to other algorithms. Thus, an value proposition for those who intend to use BiGGER as a method for efficiently study interactions between proteins in a machine that has adequate hardware.
+%%\end{itemize}
+%%
+%%E agora vamos fazer um teste com uma quebra de linha no hífen a ver se a \LaTeX\ duplica o hífen na linha seguinte…
+%%
+%%zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz zzz zzzz comentar"-lhe zzz zzzz zzz zzzz 
+%%
+%%Sim!  Funciona! :)
+%
+%
+%% Palavras-chave do resumo em Português
+%\begin{keywords}
+%proteinas, docking, computação acelerada,GPU, Bio-Informática, BiGGER
+%\end{keywords}
 \begin{keywords}
-Keywords (in English) \ldots
+proteins, docking , high performance computing, GPU, Bioinformatics, BiGGER
 \end{keywords} 
